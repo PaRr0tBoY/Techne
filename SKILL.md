@@ -24,56 +24,73 @@ Three parameterized scripts. No manual JS coding needed.
 
 ## Preference Operations (`prefs.mjs`)
 
-All pref paths follow `vivaldi.<category>.<subcategory>.<key>`. Operates on the Preferences file directly — instantaneous, no CDP needed.
-
 ```bash
-# Read a preference
+# Read a preference (instant, from disk)
 node .claude/skills/vivaldi-browser/scripts/prefs.mjs get vivaldi.tabs.bar.position
 
-# Set a preference (value must be valid JSON or plain string)
-node .claude/skills/vivaldi-browser/scripts/prefs.mjs set vivaldi.tabs.visible false
+# Set a preference (live, via Vivaldi's own API)
 node .claude/skills/vivaldi-browser/scripts/prefs.mjs set vivaldi.tabs.bar.position '"left"'
-node .claude/skills/vivaldi-browser/scripts/prefs.mjs set vivaldi.panels.position '"right"'
+
+# ⭐ BEFORE setting an enum pref, ALWAYS probe valid values first:
+node .claude/skills/vivaldi-browser/scripts/prefs.mjs probe vivaldi.tabs.stacking.mode
 
 # Search for preferences by keyword
 node .claude/skills/vivaldi-browser/scripts/prefs.mjs search break
 
 # List all preferences in a category
 node .claude/skills/vivaldi-browser/scripts/prefs.mjs list tabs
-node .claude/skills/vivaldi-browser/scripts/prefs.mjs list address_bar
 
-# Full overview of important settings
+# Full overview
 node .claude/skills/vivaldi-browser/scripts/prefs.mjs snapshot
 ```
 
-**Pref path reference** — key categories and paths:
-- `vivaldi.tabs.bar.position` — `"top"` / `"bottom"` / `"left"` / `"right"` / `"none"`
-- `vivaldi.tabs.visible` — boolean
-- `vivaldi.tabs.stacking.mode` — `"compact"` / `"accordion"` / `"two_level"`
-- `vivaldi.tabs.stacking.allow_dnd` — boolean
-- `vivaldi.address_bar.visible` — boolean
-- `vivaldi.address_bar.show_full_url` — boolean
-- `vivaldi.panels.position` — `"left"` / `"right"`
-- `vivaldi.panels.as_overlay.enabled` — boolean
-- `vivaldi.status_bar.display` — `"shown"` / `"hidden"` / `"minimized"`
-- `vivaldi.bookmarks.bar.visible` — boolean
-- `vivaldi.appearance.density` — string
-- `vivaldi.appearance.disable_title_bar` — boolean
-- `vivaldi.theme.schedule.enabled` — boolean
-- `vivaldi.theme.prefer_system_accent` — boolean
-- `vivaldi.mouse_gestures.enabled` — boolean
-- `vivaldi.mouse_gestures.rocker_gestures.enabled` — boolean
-- `vivaldi.workspaces.enabled` — boolean
-- `vivaldi.auto_hide.enabled` / `vivaldi.auto_hide.tab_bar` / `.address_bar` / `.panel` / `.status_bar` / `.bookmarks_bar` — boolean
-- `vivaldi.downloads.open_panel_on_new` — boolean
-- `vivaldi.downloads.notify_on_complete` — boolean
-- `vivaldi.webpages.smooth_scrolling.enabled` — boolean
-- `vivaldi.translate.enabled` — boolean
-- `vivaldi.menu.display` — `"horizontal"` / `"vertical"`
-- `vivaldi.keyboard.shortcuts.enable` — boolean
-- `vivaldi.keyboard.shortcuts.enable_single_key` — boolean
+### `probe` — auto-discover valid values
 
-To discover paths not listed: `prefs.mjs search <keyword>` or `prefs.mjs list <category>`.
+When setting an enum preference (position, mode, display, etc.), **always run `probe` first** to get the actual valid values for this Vivaldi version. Do NOT guess from hardcoded docs — Vivaldi changes enum names between versions.
+
+```bash
+node .claude/skills/vivaldi-browser/scripts/prefs.mjs probe vivaldi.tabs.stacking.mode
+# → valid: ["substrip","off","accordion","dotted"], current: "substrip", default: "substrip"
+
+node .claude/skills/vivaldi-browser/scripts/prefs.mjs probe vivaldi.tabs.bar.position
+# → valid: ["top","bottom","left","right"], current: "right", default: "top"
+```
+
+The probe command:
+1. Reads the current value and default from Vivaldi
+2. Tests candidate values (generated from path keywords like "mode", "position", "display")
+3. Returns only values that Vivaldi actually accepts
+4. Restores the original value (no side effects)
+
+### Common preference paths
+
+| Path | Category |
+|------|----------|
+| `vivaldi.tabs.bar.position` | Tab bar position |
+| `vivaldi.tabs.visible` | Show tab bar |
+| `vivaldi.tabs.stacking.mode` | Stack style |
+| `vivaldi.tabs.stacking.allow_dnd` | Drag to stack |
+| `vivaldi.tabs.open_new_in_background` | Background tabs |
+| `vivaldi.tabs.cycle_by_recent_order` | Tab cycling |
+| `vivaldi.tabs.activation.on_close` | Activate after close |
+| `vivaldi.address_bar.visible` | Show address bar |
+| `vivaldi.address_bar.show_full_url` | Full URL |
+| `vivaldi.panels.position` | Panel side |
+| `vivaldi.panels.as_overlay.enabled` | Floating panels |
+| `vivaldi.status_bar.display` | Status bar |
+| `vivaldi.bookmarks.bar.visible` | Bookmarks bar |
+| `vivaldi.appearance.density` | UI density |
+| `vivaldi.theme.schedule.enabled` | Theme schedule |
+| `vivaldi.theme.prefer_system_accent` | System accent |
+| `vivaldi.mouse_gestures.enabled` | Mouse gestures |
+| `vivaldi.workspaces.enabled` | Workspaces |
+| `vivaldi.auto_hide.enabled` | Auto-hide UI |
+| `vivaldi.auto_hide.tab_bar` | Auto-hide tab bar |
+| `vivaldi.webpages.smooth_scrolling.enabled` | Smooth scroll |
+| `vivaldi.downloads.open_panel_on_new` | Download panel |
+| `vivaldi.keyboard.shortcuts.enable` | Keyboard shortcuts |
+
+For any path not listed: `prefs.mjs search <keyword>` or `prefs.mjs list <category>`.
 
 ## Shortcut Operations (`shortcuts.mjs`)
 
@@ -146,23 +163,22 @@ Captures: `log`, `warn`, `error`, `info`, `debug`, `trace`, `dir` + uncaught exc
 
 **`data.mjs` and `console`** auto-start Vivaldi if needed.
 
-## Enum Preferences (real-time supported)
+## How Changes Apply
 
-These use internal integer enums in the Preferences file. The script accepts either the string name or integer — e.g. both `set ... position '"left"'` and `set ... position 1` work. **All changes are applied live** via CDP.
+**`prefs.mjs set`**: calls `self.vivaldi.prefs.set({path, value})` via CDP — the exact same API Vivaldi's own settings page uses. Changes are instant and persist across restarts.
 
-| Preference | 0 | 1 | 2 | 3 | 4 |
-|---|---|---|---|---|---|
-| `tabs.bar.position` | top | **left** | right | bottom | none |
-| `panels.position` | left | right | — | — | — |
-| `status_bar.display` | shown | hidden | minimized | — | — |
-| `tabs.stacking.mode` | compact | accordion | two_level | — | — |
-| `menu.display` | horizontal | vertical | — | — | — |
-| `tabs.activation.on_close` | neighbor | related | last_active | order | — |
-| `tabs.double_click` | none | close | new_tab | reload | mute |
-| `startpage.speed_dial.size` | small | medium | large | — | — |
-| `tabs.new_placement` | after_related | after_active | end | — | — |
+**`shortcuts.mjs set`**: requires Vivaldi restart (auto-handled by the script).
 
-## ⚠️ Safety Rules for Preferences
+**`data.mjs` and `console`**: auto-start Vivaldi with debug port if not running.
+
+## Workflow when changing a setting
+
+1. **If the preference is an enum** (position, mode, display, etc.): run `probe` first to get valid values
+2. **Read current value**: `prefs.mjs get <path>`
+3. **Set**: `prefs.mjs set <path> '"value"'`
+4. **If set fails** (value reverted): run `probe <path>` to discover actual valid options
+
+## ⚠️ Safety Rules
 
 1. **Read before write** — always `get` first to show current value
 2. **Know the value type** — booleans need `true`/`false`, strings need `'"quoted"'`, numbers are bare
