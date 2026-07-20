@@ -1,46 +1,82 @@
-# Vivaldi Browser Skill
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%"
+       alt="Skills Collection — a multi-skill repository for AI agents featuring Vivaldi browser control">
+</p>
 
-[![skills.sh](https://skills.sh/b/PaRr0tBoY/vivaldi-browser-skill)](https://skills.sh/PaRr0tBoY/vivaldi-browser-skill)
+## What it does
 
-AI agent skill for reading and writing Vivaldi browser settings and data — change 600+ preferences, configure keyboard shortcuts, query tabs/bookmarks/history/downloads, capture live console output.
+A modular repository of skills for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts — drop it into your agent's skill folder and it works immediately.
+
+Currently ships two skills; the structure is designed for you to add more.
+
+## Available Skills
+
+<p align="center">
+  <img src="./assets/readme/section-skills.svg" width="100%"
+       alt="Available Skills">
+</p>
+
+| Skill                                                   | What it controls | Key capabilities                                                                                                                                |
+| ------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[vivaldi-browser](skills/vivaldi-browser/)**     | Vivaldi browser  | 600+ preference paths with live CDP apply · keyboard shortcut management · tab/bookmark/history/download queries · live console capture      |
+| **[headless-debugger](skills/headless-debugger/)** | Any script       | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
+
+### vivaldi-browser
+
+The flagship skill. Four parameterized scripts — no manual JS coding needed.
+
+```bash
+# Preferences: read, write, search 600+ paths with instant live-apply
+node scripts/prefs.mjs get vivaldi.tabs.bar.position
+node scripts/prefs.mjs set vivaldi.tabs.bar.position '"left"'
+node scripts/prefs.mjs search theme
+
+# Shortcuts: get, set, list keyboard shortcuts (auto-handles Vivaldi restart)
+node scripts/shortcuts.mjs set COMMAND_BREAKMODE_TOGGLE alt+,
+
+# Data: query open tabs, bookmarks, history, downloads
+node scripts/data.mjs tabs
+node scripts/data.mjs bookmarks github
+node scripts/data.mjs history today
+
+# Console: capture live browser output with keyword filter
+node scripts/cdp-client.mjs --console -d 10 -f ERROR
+```
+
+**How changes apply:** `prefs.mjs set` writes to disk and pushes live via CDP — instant effect, survives restart. `shortcuts.mjs set` auto-closes Vivaldi, modifies, and restarts. `data.mjs` and console auto-launch Vivaldi with debug port if not running.
+
+### headless-debugger
+
+Turn any interactive script into a self-testable artifact. Injects a `--headless` / `-Headless` parameter that bypasses all interactive prompts, then traverses every user flow to find and fix bugs — no human interaction needed.
+
+```bash
+# Install the headless-debugger skill
+npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/headless-debugger
+```
+
+**Supported languages:** PowerShell, Bash, Python, Node.js, Go, Ruby
 
 ## Install
 
 ```bash
-npx skills add PaRr0tBoY/vivaldi-browser-skill
+# Install the Vivaldi skill
+npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/vivaldi-browser
+
+# Install the headless-debugger skill
+npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/headless-debugger
 ```
 
-## Features
+**Requirements:** Node.js >= 18 · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser skill only)
 
-- **Preferences** — read/write/search 600+ Vivaldi preference paths with live-apply via CDP
-- **Keyboard Shortcuts** — get/set/list Vivaldi keyboard shortcuts
-- **Browser Data** — query open tabs, bookmarks, history, and downloads
-- **Console Monitor** — capture live browser console output with keyword filtering
+## Repository structure
 
-## Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/prefs.mjs` | Read/write/search Vivaldi preferences |
-| `scripts/shortcuts.mjs` | Get/set/list keyboard shortcuts |
-| `scripts/data.mjs` | Query tabs, bookmarks, history, downloads |
-| `scripts/cdp-client.mjs` | CDP client — console capture, live apply |
-
-## Usage
-
-Once installed as a skill, the agent reads `SKILL.md` and executes the scripts automatically. Examples of what you can ask:
-
-- "Show me my current tab bar position"
-- "Move the tab bar to the left side"
-- "Enable mouse gestures"
-- "List all my open tabs"
-- "Set Ctrl+Shift+B as the bookmark toggle shortcut"
-- "Capture console errors for 10 seconds"
-
-## Requirements
-
-- [Vivaldi Browser](https://vivaldi.com/) installed
-- Node.js ≥ 18
+```
+skills/
+  <skill-name>/
+    SKILL.md          # Skill definition — frontmatter + agent instructions
+    scripts/          # Supporting scripts (optional)
+    references/       # Reference documentation (optional)
+```
 
 ## License
 
