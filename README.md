@@ -2,14 +2,22 @@
   <img src="./assets/readme/hero.svg" width="100%"
        alt="Techne — A modular collection of self-contained AI agent skills">
 </p>
+<p align="center">
+  <a href="https://skills.sh/PaRr0tBoY/Techne"><img src="https://skills.sh/b/PaRr0tBoY/Techne" alt="skills.sh"></a>
+  <img src="https://img.shields.io/github/license/PaRr0tBoY/Techne" alt="License">
+  <img src="https://img.shields.io/github/stars/PaRr0tBoY/Techne" alt="GitHub Stars">
+  <img src="https://img.shields.io/badge/skills-3-blue" alt="Skills">
+  <img src="https://img.shields.io/badge/node.js-%3E%3D18-green" alt="Node.js">
+</p>
+
 
 ## Quick start
 
 ```bash
 # Install any skill individually
-npx skills add PaRr0tBoY/Techne/skills/vivaldi-browser
-npx skills add PaRr0tBoY/Techne/skills/headless-debugger
-npx skills add PaRr0tBoY/Techne/skills/github-base-finder
+npx skills add -y -g PaRr0tBoY/Techne/skills/vivaldi-browser
+npx skills add -y -g PaRr0tBoY/Techne/skills/headless-debugger
+npx skills add -y -g PaRr0tBoY/Techne/skills/github-base-finder
 ```
 
 **Requirements:** Node.js >= 18 · Python >= 3.10 (for github-base-finder) · [gh CLI](https://cli.github.com/) (for github-base-finder) · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser only)
