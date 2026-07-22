@@ -7,7 +7,7 @@
 
 A modular repository of skills for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts — drop it into your agent's skill folder and it works immediately.
 
-Currently ships two skills; the structure is designed for you to add more.
+Currently ships three skills; the structure is designed for you to add more.
 
 ## Available Skills
 
@@ -20,6 +20,7 @@ Currently ships two skills; the structure is designed for you to add more.
 | ------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[vivaldi-browser](skills/vivaldi-browser/)**     | Vivaldi browser  | 600+ preference paths with live CDP apply · keyboard shortcut management · tab/bookmark/history/download queries · live console capture      |
 | **[headless-debugger](skills/headless-debugger/)** | Any script       | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
+| **[github-base-finder](skills/github-base-finder/)** | GitHub search    | PRD decomposition → multi-strategy repo search → candidate evaluation → comparison matrix · batch search · awesome-list mining              |
 
 ### vivaldi-browser
 
@@ -50,23 +51,45 @@ node scripts/cdp-client.mjs --console -d 10 -f ERROR
 Turn any interactive script into a self-testable artifact. Injects a `--headless` / `-Headless` parameter that bypasses all interactive prompts, then traverses every user flow to find and fix bugs — no human interaction needed.
 
 ```bash
-# Install the headless-debugger skill
 npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/headless-debugger
 ```
 
 **Supported languages:** PowerShell, Bash, Python, Node.js, Go, Ruby
 
+### github-base-finder
+
+Find the best GitHub project to use as a foundation for secondary development, based on a PRD.
+Decomposes requirements into search queries, runs multi-strategy GitHub search, evaluates candidates
+across 6 dimensions, and produces a comparison matrix with recommendations.
+
+```bash
+# Single repo search
+py scripts/search.py search "project management kanban" --lang TypeScript --stars 500 --limit 10 --format markdown
+
+# Batch search from JSON file
+py scripts/search.py batch queries.json --stars 100 --limit 10 --format markdown
+
+# Detailed repo metadata (README excerpt, release info, topics)
+py scripts/search.py detail makeplane/plane --format markdown
+
+# Find repos with shared topics
+py scripts/search.py related makeplane/plane --limit 10 --format markdown
+
+# Mine awesome-lists for domain
+py scripts/search.py awesome "project management" --limit 5 --format markdown
+```
+
+**Workflow:** PRD → decompose features → generate queries → search → enrich → evaluate → compare → recommend
+
 ## Install
 
 ```bash
-# Install the Vivaldi skill
 npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/vivaldi-browser
-
-# Install the headless-debugger skill
 npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/headless-debugger
+npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/github-base-finder
 ```
 
-**Requirements:** Node.js >= 18 · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser skill only)
+**Requirements:** Node.js >= 18 · Python >= 3.10 · [gh CLI](https://cli.github.com/) (for github-base-finder) · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser only)
 
 ## Repository structure
 
