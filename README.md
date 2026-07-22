@@ -1,9 +1,6 @@
-<p align="center">
-  <img src="./assets/readme/hero.svg" width="100%"
-       alt="Skills Collection — a multi-skill repository for AI agents featuring Vivaldi browser control">
-</p>
+# Vivaldi Browser Skill
 
-## What it does
+[![skills.sh](https://skills.sh/b/PaRr0tBoY/vivaldi-browser-skill)](https://skills.sh/PaRr0tBoY/vivaldi-browser-skill)
 
 A modular repository of skills for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts — drop it into your agent's skill folder and it works immediately.
 
@@ -11,16 +8,11 @@ Currently ships three skills; the structure is designed for you to add more.
 
 ## Available Skills
 
-<p align="center">
-  <img src="./assets/readme/section-skills.svg" width="100%"
-       alt="Available Skills">
-</p>
-
-| Skill                                                   | What it controls | Key capabilities                                                                                                                                |
-| ------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[vivaldi-browser](skills/vivaldi-browser/)**     | Vivaldi browser  | 600+ preference paths with live CDP apply · keyboard shortcut management · tab/bookmark/history/download queries · live console capture      |
-| **[headless-debugger](skills/headless-debugger/)** | Any script       | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
-| **[github-base-finder](skills/github-base-finder/)** | GitHub search    | PRD decomposition → multi-strategy repo search → candidate evaluation → comparison matrix · batch search · awesome-list mining              |
+| Skill | What it controls | Key capabilities |
+|-------|-----------------|------------------|
+| **[vivaldi-browser](skills/vivaldi-browser/)** | Vivaldi browser | 600+ preference paths with live CDP apply · keyboard shortcut management · tab/bookmark/history/download queries · live console capture |
+| **[headless-debugger](skills/headless-debugger/)** | Any script | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
+| **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 
 ### vivaldi-browser
 
@@ -94,11 +86,24 @@ npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/github-base-finder
 ## Repository structure
 
 ```
-skills/
-  <skill-name>/
-    SKILL.md          # Skill definition — frontmatter + agent instructions
-    scripts/          # Supporting scripts (optional)
-    references/       # Reference documentation (optional)
+vivaldi-browser-skill/
+├── skills/
+│   ├── vivaldi-browser/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   │       ├── prefs.mjs
+│   │       ├── shortcuts.mjs
+│   │       ├── data.mjs
+│   │       └── cdp-client.mjs
+│   ├── headless-debugger/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   │       └── debug-headless.*.ps1|.sh|.py|.mjs|.go|.rb
+│   └── github-base-finder/
+│       ├── SKILL.md
+│       └── scripts/
+│           └── search.py
+└── README.md
 ```
 
 ## License
