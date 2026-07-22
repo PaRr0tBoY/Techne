@@ -1,4 +1,4 @@
-# Vivaldi Browser Skill
+# Techne
 
 [![skills.sh](https://skills.sh/b/PaRr0tBoY/vivaldi-browser-skill)](https://skills.sh/PaRr0tBoY/vivaldi-browser-skill)
 
