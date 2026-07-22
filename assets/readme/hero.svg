@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      width="1200" height="380" viewBox="0 0 1200 380"
      role="img" aria-labelledby="hero-title hero-desc">
-  <title id="hero-title">Skills Collection</title>
-  <desc id="hero-desc">A multi-skill repository for AI agents, featuring Vivaldi browser control with 600+ preference paths and live CDP apply.</desc>
+  <title id="hero-title">Techne</title>
+  <desc id="hero-desc">A modular collection of self-contained AI agent skills — drop into your agent's skill folder and they work immediately.</desc>
 
   <defs>
     <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0f1218"/>
-      <stop offset="100%" stop-color="#141a22"/>
+      <stop offset="100%" stop-color="#151a23"/>
     </linearGradient>
     <clipPath id="term-clip">
       <rect x="640" y="40" width="512" height="300" rx="10"/>
@@ -34,8 +34,8 @@
 
     <!-- Title -->
     <text y="68" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-          font-size="42" font-weight="700" fill="#e6edf3" letter-spacing="-0.5">
-      Skills Collection
+          font-size="48" font-weight="700" fill="#e6edf3" letter-spacing="-1">
+      Techne
     </text>
 
     <!-- Subtitle -->
@@ -49,12 +49,12 @@
 
     <!-- Description -->
     <text y="158" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-          font-size="14.5" fill="#8b98ac">
-      Control browsers, automate workflows,
+          font-size="14" fill="#5a6577">
+      Drop-in skills for browser control, script debugging,
     </text>
     <text y="180" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-          font-size="14.5" fill="#8b98ac">
-      extend agent capabilities.
+          font-size="14" fill="#5a6577">
+      and GitHub project discovery. Each is self-contained.
     </text>
 
     <!-- Stats row -->
@@ -62,16 +62,16 @@
       <!-- Stat 1 -->
       <g>
         <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-              font-size="20" font-weight="700" fill="#e6edf3">2</text>
+              font-size="20" font-weight="700" fill="#e6edf3">3</text>
         <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
               font-size="11" fill="#7a8599">Skills</text>
       </g>
       <!-- Stat 2 -->
       <g transform="translate(80, 0)">
         <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-              font-size="20" font-weight="700" fill="#e6edf3">4</text>
+              font-size="20" font-weight="700" fill="#e6edf3">6</text>
         <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
-              font-size="11" fill="#7a8599">Scripts</text>
+              font-size="11" fill="#7a8599">Languages</text>
       </g>
       <!-- Stat 3 -->
       <g transform="translate(160, 0)">
@@ -109,49 +109,46 @@
 
     <!-- Terminal content -->
     <g transform="translate(20, 52)">
-      <!-- Install command -->
+      <!-- Install commands -->
       <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#3e4b3f">
         <tspan fill="#5a6577">$</tspan>
         <tspan fill="#dce4ec" dx="6">npx skills add PaRr0tBoY/</tspan>
       </text>
       <text y="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#dce4ec">
-        vivaldi-browser-skill/skills/vivaldi-browser
+        Techne/skills/vivaldi-browser
       </text>
       <text y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#3e4b3f">
         ✓ Added vivaldi-browser
       </text>
 
       <!-- Blank line -->
+      <text y="56" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+        <tspan fill="#5a6577">$</tspan>
+        <tspan fill="#dce4ec" dx="6">npx skills add PaRr0tBoY/</tspan>
+      </text>
+      <text y="72" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#dce4ec">
+        Techne/skills/headless-debugger
+      </text>
+      <text y="92" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#3e4b3f">
+        ✓ Added headless-debugger
+      </text>
+
       <!-- Directory tree -->
-      <text y="64" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+      <text y="120" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
         skills/
       </text>
-      <text y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        └── <tspan fill="#c4955e">vivaldi-browser</tspan>/
+      <text y="136" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+        ├── <tspan fill="#c4955e">vivaldi-browser</tspan>/
       </text>
-      <text y="96" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   ├── <tspan fill="#dce4ec">SKILL.md</tspan>
+      <text y="152" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+        ├── <tspan fill="#c4955e">headless-debugger</tspan>/
       </text>
-      <text y="112" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   ├── <tspan fill="#8b98ac">scripts/</tspan>
+      <text y="168" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+        └── <tspan fill="#c4955e">github-base-finder</tspan>/
       </text>
-      <text y="128" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   │   ├── prefs.mjs
-      </text>
-      <text y="144" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   │   ├── shortcuts.mjs
-      </text>
-      <text y="160" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   │   ├── data.mjs
-      </text>
-      <text y="176" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   │   └── cdp-client.mjs
-      </text>
-      <text y="192" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
-        │   └── <tspan fill="#8b98ac">references/</tspan>
-      </text>
+
       <!-- Cursor -->
-      <text y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
+      <text y="196" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#5a6577">
         <tspan fill="#5a6577">$</tspan>
         <tspan fill="#3e4b3f" dx="6">█</tspan>
       </text>

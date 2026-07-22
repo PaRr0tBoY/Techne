@@ -1,13 +1,13 @@
 # Vivaldi Browser Skill
 
-[![skills.sh](https://skills.sh/b/PaRr0tBoY/vivaldi-browser-skill)](https://skills.sh/PaRr0tBoY/vivaldi-browser-skill)
+[![skills.sh](https://skills.sh/b/PaRr0tBoY/Techne)](https://skills.sh/PaRr0tBoY/Techne)
 
 AI agent skill for reading and writing Vivaldi browser settings and data — change 600+ preferences, configure keyboard shortcuts, query tabs/bookmarks/history/downloads, capture live console output.
 
 ## Install
 
 ```bash
-npx skills add PaRr0tBoY/vivaldi-browser-skill/skills/vivaldi-browser
+npx skills add PaRr0tBoY/Techne/skills/vivaldi-browser
 ```
 
 ## Features
