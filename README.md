@@ -14,10 +14,8 @@
 ## Quick start
 
 ```bash
-# Install any skill individually
-npx skills add -y -g PaRr0tBoY/Techne/skills/vivaldi-browser
-npx skills add -y -g PaRr0tBoY/Techne/skills/headless-debugger
-npx skills add -y -g PaRr0tBoY/Techne/skills/github-base-finder
+# Install all skills at once
+npx skills@latest add -y -g PaRr0tBoY/Techne
 ```
 
 **Requirements:** Node.js >= 18 · Python >= 3.10 (for github-base-finder) · [gh CLI](https://cli.github.com/) (for github-base-finder) · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser only)
@@ -64,6 +62,10 @@ The agent reads `SKILL.md` and executes the scripts automatically. No manual con
 
 ## vivaldi-browser
 
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/vivaldi-browser
+```
+
 The flagship skill. Four parameterized scripts — no manual JS coding needed.
 
 ```bash
@@ -90,6 +92,10 @@ node scripts/cdp-client.mjs --console -d 10 -f ERROR
 
 ## headless-debugger
 
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/headless-debugger
+```
+
 Turn any interactive script into a self-testable artifact. Injects a `--headless` / `-Headless` parameter that bypasses all interactive prompts, then traverses every user flow to find and fix bugs — no human interaction needed.
 
 **Supported languages:** PowerShell, Bash, Python, Node.js, Go, Ruby
@@ -97,6 +103,10 @@ Turn any interactive script into a self-testable artifact. Injects a `--headless
 ---
 
 ## github-base-finder
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/github-base-finder
+```
 
 Find the best GitHub project to use as a foundation for secondary development, based on a PRD.
 Decomposes requirements into search queries, runs multi-strategy GitHub search, evaluates candidates
