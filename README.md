@@ -6,7 +6,7 @@
   <a href="https://skills.sh/PaRr0tBoY/Techne"><img src="https://skills.sh/b/PaRr0tBoY/Techne" alt="skills.sh"></a>
   <img src="https://img.shields.io/github/license/PaRr0tBoY/Techne" alt="License">
   <img src="https://img.shields.io/github/stars/PaRr0tBoY/Techne" alt="GitHub Stars">
-  <img src="https://img.shields.io/badge/skills-3-blue" alt="Skills">
+  <img src="https://img.shields.io/badge/skills-5-blue" alt="Skills">
   <img src="https://img.shields.io/badge/node.js-%3E%3D18-green" alt="Node.js">
 </p>
 
@@ -18,15 +18,15 @@
 npx skills@latest add -y -g PaRr0tBoY/Techne
 ```
 
-**Requirements:** Node.js >= 18 · Python >= 3.10 (for github-base-finder) · [gh CLI](https://cli.github.com/) (for github-base-finder) · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser only)
+**Requirements:** Node.js >= 18 · Python >= 3.10 (for github-base-finder, sync-upstream) · [gh CLI](https://cli.github.com/) (for github-base-finder) · [Vivaldi Browser](https://vivaldi.com/) (for vivaldi-browser only)
 
 ---
 
 ## What is Techne?
 
-A modular repository of skills for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts — drop it into your agent's skill folder and it works immediately.
+A modular repository of skills and commands for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts. Each command is a prompt template in a `.md` file — drop them into your agent's folder and they work immediately.
 
-Three skills ship today; the structure is designed for you to add more.
+Five skills ship today; the structure is designed for you to add more.
 
 ---
 
@@ -42,6 +42,8 @@ Three skills ship today; the structure is designed for you to add more.
 | **[vivaldi-browser](skills/vivaldi-browser/)** | Vivaldi browser | 600+ preference paths with live CDP apply · keyboard shortcut management · tab/bookmark/history/download queries · live console capture |
 | **[headless-debugger](skills/headless-debugger/)** | Any script | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
+| **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
+| **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
 
 ---
 
@@ -131,6 +133,61 @@ python scripts/search.py awesome "project management" --limit 5 --format markdow
 
 **Workflow:** PRD → decompose features → generate queries → search → enrich → evaluate → compare → recommend
 
+## sync-upstream
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/sync-upstream
+```
+
+Sync your fork with upstream without the guesswork. Analyzes upstream changes, detects conflicts, generates a standalone interactive HTML report, and executes your per-file merge decisions.
+
+```bash
+# One-step interactive: analyze → report → serve → execute
+python scripts/sync_upstream.py --interactive --branch fix/my-feature
+
+# Step-by-step
+python scripts/sync_upstream.py --dry-run --output report.html   # generate report
+python scripts/sync_upstream.py --serve --output report.html     # open in browser, block until submit
+python scripts/sync_upstream.py --execute decisions.json          # apply decisions
+```
+
+**No dependencies:** pure Python stdlib + git CLI. Works on Windows and Unix.
+
+---
+
+## agentic-engineer
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/agentic-engineer
+```
+
+Mechanical engineering assistant toolbox. Covers the full document lifecycle for project plans, budgets, DFM reviews, CAPA, SOP, test plans, equipment sizing, maintenance schedules, and more — 16 branch commands with bilingual templates.
+
+```bash
+# Invoke a branch command (examples)
+/project-plan   # or /立项 — project proposal
+/budget         # or /预算 — budget & cost analysis
+/dfm            # or /可制造性 — design for manufacturability review
+/capa           # or /纠正预防 — corrective & preventive action
+```
+
+**Collaboration modes:** each module adapts its interaction style — direct delivery for routine tasks, teaching for training, iterative for calculations, and structured checklist for inspections.
+
+---
+
+## Commands
+
+Slash commands for omp / Claude Code. Copy `commands/*.md` to `~/.omp/agent/commands/` (omp) or
+`~/.claude/commands/` (Claude Code) to make them available as `/command-name` in any project.
+
+| Command | Purpose |
+|---------|--------|
+| **[/ask-support](commands/ask-support.md)** | Pause fixing, generate a self-contained technical report for external review |
+| **[/you-gon-learn](commands/you-gon-learn.md)** | Post-task retrospective: extract reusable engineering lessons, update AGENTS.md and long-term memory |
+| **[/shepherd](commands/shepherd.md)** | Create isolated dev environment from a GitHub Issue/PR (worktree + branch + agent) |
+| **[/commitpush](commands/commitpush.md)** | Wrap up dev work: stage relevant files, commit, push, create PR, clean up |
+| **[/snapshot](commands/snapshot.md)** | Create a dev checkpoint: commit + annotated tag as a rollback baseline |
+
 ---
 
 ## Repository structure
@@ -138,6 +195,10 @@ python scripts/search.py awesome "project management" --limit 5 --format markdow
 ```
 techne/
 ├── skills/
+│   ├── agentic-engineer/
+│   │   ├── SKILL.md
+│   │   ├── scripts/
+│   │   └── references/
 │   ├── vivaldi-browser/
 │   │   ├── SKILL.md
 │   │   └── scripts/
@@ -145,21 +206,27 @@ techne/
 │   │       ├── shortcuts.mjs
 │   │       ├── data.mjs
 │   │       └── cdp-client.mjs
-│   ├── headless-debugger/
+│   ├── github-base-finder/
 │   │   ├── SKILL.md
-│   │   └── scripts/
-│   │       └── debug-headless.*.ps1|.sh|.py|.mjs|.go|.rb
-│   └── github-base-finder/
+│   │   ├── scripts/
+│   │   └── references/
+│   ├── headless-debugger/
+│   │   └── SKILL.md
+│   └── sync-upstream/
 │       ├── SKILL.md
 │       └── scripts/
-│           └── search.py
+├── commands/
+│   ├── ask-support.md
+│   ├── you-gon-learn.md
+│   ├── shepherd.md
+│   ├── commitpush.md
+│   └── snapshot.md
 ├── assets/
 │   └── readme/
 │       ├── hero.svg
 │       └── section-skills.svg
 └── README.md
 ```
-
 ---
 
 ## License
