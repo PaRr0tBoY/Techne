@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sync Upstream Report — {REPO}</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+body { font:14px/1.5 system-ui,sans-serif; background:#1a1a2e; color:#e0e0e0; padding:24px; max-width:1100px; margin:0 auto }
+h1 { font-size:1.5em; margin-bottom:8px }
+h2 { font-size:1.1em; margin:24px 0 12px; border-bottom:1px solid #333; padding-bottom:6px }
+.summary { display:flex; gap:20px; margin:16px 0 }
+.summary .stat { background:#16213e; border-radius:8px; padding:12px 20px; text-align:center }
+.summary .stat .num { font-size:2em; font-weight:700 }
+.summary .stat.conflict .num { color:#e94560 }
+.summary .stat.clean .num { color:#0f3460 }
+.meta { color:#888; font-size:.85em; margin-bottom:20px }
+.item { background:#16213e; border-radius:8px; margin:12px 0; padding:16px; border-left:4px solid #333 }
+.item.conflict { border-left-color:#e94560 }
+.item.both { border-left-color:#f0a500 }
+.item.clean { border-left-color:#00b894 }
+.item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px }
+.item-path { font-family:monospace; font-size:13px; word-break:break-all }
+.badge { font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600 }
+.badge.conflict { background:#e94560; color:#fff }
+.badge.both { background:#f0a500; color:#1a1a2e }
+.badge.clean { background:#00b894; color:#1a1a2e }
+.diff-preview { background:#0d1117; border-radius:6px; padding:12px; font-family:monospace; font-size:12px; overflow-x:auto; max-height:300px; overflow-y:auto; white-space:pre; margin:8px 0; display:none }
+.diff-preview.show { display:block }
+.toggle-diff { background:none; border:1px solid #444; color:#888; padding:4px 12px; border-radius:4px; cursor:pointer; font-size:12px; margin-top:4px }
+.toggle-diff:hover { border-color:#888; color:#fff }
+.decisions { margin-top:12px; display:flex; flex-wrap:wrap; gap:12px; align-items:center }
+.decisions label { font-size:13px; cursor:pointer; display:flex; align-items:center; gap:4px }
+.decisions input[type="radio"], .decisions input[type="checkbox"] { accent-color:#533483 }
+.comment-box { width:100%; background:#0d1117; border:1px solid #333; border-radius:4px; padding:8px; color:#e0e0e0; font-size:13px; margin-top:8px; resize:vertical; min-height:40px; font-family:inherit }
+.comment-box:focus { border-color:#533483; outline:none }
+.actions { margin-top:24px; text-align:center }
+.submit-btn { background:#533483; color:#fff; border:none; padding:12px 32px; border-radius:6px; font-size:15px; cursor:pointer; font-weight:600 }
+.submit-btn:hover { background:#6c41b0 }
+.submit-btn:disabled { opacity:.5; cursor:not-allowed }
+.empty { text-align:center; color:#666; padding:40px }
+</style>
+</head>
+<body>
+<h1>Sync Upstream Report</h1>
+<div class="meta">
+  <strong>{REPO}</strong> &middot; {BRANCH} &larr; {UPSTREAM_REMOTE}/{UPSTREAM_BRANCH}<br>
+  upstream: <code>{UPSTREAM_HEAD}</code> &middot; merge-base: <code>{MERGE_BASE}</code><br>
+  generated: {GENERATED}
+</div>
+
+<div class="summary">
+  <div class="stat"><div class="num">{TOTAL}</div>total changes</div>
+  <div class="stat clean"><div class="num">{CLEAN}</div>clean</div>
+  <div class="stat conflict"><div class="num">{CONFLICTS}</div>conflicts</div>
+</div>
+
+<h2>Files</h2>
+<div id="items"></div>
+<div id="empty-msg" class="empty" style="display:none">No upstream changes detected.</div>
+
+<div class="actions">
+  <button class="submit-btn" id="submit-btn" onclick="submitDecisions()">Submit Decisions</button>
+  <div id="submit-status" style="color:#888;font-size:12px;margin-top:8px"></div>
+</div>
+
+<script>
+window.SERVE_PORT = {SERVE_PORT};
+var REPORT = {REPORT_JSON};
+
+function render() {
+  var container = document.getElementById('items');
+  var empty = document.getElementById('empty-msg');
+  if (!REPORT.items || REPORT.items.length === 0) {
+    empty.style.display = 'block';
+    document.getElementById('submit-btn').disabled = true;
+    return;
+  }
+  container.innerHTML = REPORT.items.map(function(item, idx) {
+    var statusClass = item.status;
+    var badgeText = item.status === 'conflict' ? 'CONFLICT'
+      : item.status === 'both' ? 'BOTH MODIFIED' : 'CLEAN';
+    var upstreamLabel = item.upstream_diff_lines
+      ? '+' + item.upstream_diff_lines + ' lines upstream' : '';
+    var localLabel = item.local_diff_lines
+      ? item.local_diff_lines + ' lines local' : '';
+    var decisionsHtml = '';
+    if (item.status === 'conflict') {
+      decisionsHtml =
+        '<div class="decisions">' +
+        '<label><input type="radio" name="action-' + idx + '" value="upstream" checked> Take upstream</label>' +
+        '<label><input type="radio" name="action-' + idx + '" value="local"> Keep local</label>' +
+        '<label><input type="radio" name="action-' + idx + '" value="manual"> Review manually</label>' +
+        '</div>';
+    } else if (item.status === 'both') {
+      decisionsHtml =
+        '<div class="decisions">' +
+        '<label><input type="checkbox" name="accept-' + idx + '" checked onchange="var el=document.getElementById(\'reject-reason-' + idx + '\');el.style.display=this.checked?\'none\':\'block\'"> Accept merged result</label>' +
+        '<div id="reject-reason-' + idx + '" style="display:none">' +
+        '<textarea class="comment-box" placeholder="Why reject?" data-idx="' + idx + '" data-field="reject_reason"></textarea>' +
+        '</div></div>';
+    } else {
+      decisionsHtml =
+        '<div class="decisions">' +
+        '<label><input type="checkbox" name="accept-' + idx + '" checked onchange="var el=document.getElementById(\'reject-reason-' + idx + '\');el.style.display=this.checked?\'none\':\'block\'"> Accept</label>' +
+        '<div id="reject-reason-' + idx + '" style="display:none">' +
+        '<textarea class="comment-box" placeholder="Why reject?" data-idx="' + idx + '" data-field="reject_reason"></textarea>' +
+        '</div></div>';
+    }
+    var diffPreviews = '';
+    if (item.conflict_content) {
+      diffPreviews +=
+        '<div><button class="toggle-diff" onclick="this.nextElementSibling.classList.toggle(\'show\')">Conflict markers</button>' +
+        '<div class="diff-preview">' + escapeHtml(item.conflict_content) + '</div></div>';
+    }
+    if (item.upstream_diff && item.status !== 'conflict') {
+      diffPreviews +=
+        '<div><button class="toggle-diff" onclick="this.nextElementSibling.classList.toggle(\'show\')">Upstream diff</button>' +
+        '<div class="diff-preview">' + escapeHtml(item.upstream_diff) + '</div></div>';
+    }
+    return '<div class="item ' + statusClass + '" id="item-' + idx + '">' +
+      '<div class="item-header">' +
+      '<span class="item-path">' + escapeHtml(item.path) + '</span>' +
+      '<span><span style="color:#888;font-size:12px;margin-right:8px">' +
+      [upstreamLabel, localLabel].filter(Boolean).join(' &middot; ') +
+      '</span><span class="badge ' + statusClass + '">' + badgeText + '</span></span>' +
+      '</div>' + diffPreviews + decisionsHtml +
+      '<textarea class="comment-box" placeholder="Comment (optional)" data-idx="' + idx + '" data-field="comment"></textarea>' +
+      '</div>';
+  }).join('');
+}
+
+function escapeHtml(s) {
+  var div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+async function submitDecisions() {
+  var decisions = [];
+  var items = REPORT.items || [];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var d = { path: item.path };
+    if (item.status === 'conflict') {
+      var radio = document.querySelector('input[name="action-' + i + '"]:checked');
+      d.action = radio ? radio.value : 'upstream';
+    } else {
+      var cb = document.querySelector('input[name="accept-' + i + '"]');
+      d.accept = cb ? cb.checked : true;
+      if (!d.accept) {
+        var reasonEl = document.querySelector('textarea[data-field="reject_reason"][data-idx="' + i + '"]');
+        d.reject_reason = reasonEl ? reasonEl.value : '';
+      }
+    }
+    var commentEl = document.querySelector('textarea[data-field="comment"][data-idx="' + i + '"]');
+    d.comment = commentEl ? commentEl.value : '';
+    decisions.push(d);
+  }
+  var payload = {
+    decisions: decisions,
+    branch: REPORT.branch,
+    upstream_remote: REPORT.upstream_remote,
+    upstream_branch: REPORT.upstream_branch,
+    upstream_head: REPORT.upstream_head
+  };
+  if (window.SERVE_PORT) {
+    try {
+      var resp = await fetch('http://localhost:' + window.SERVE_PORT + '/submit', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if (resp.ok) {
+        document.getElementById('submit-status').textContent = 'Decisions submitted. You may close this tab.';
+        document.getElementById('submit-btn').disabled = true;
+      } else {
+        document.getElementById('submit-status').textContent = 'Error submitting. Check the terminal.';
+      }
+    } catch (e) {
+      document.getElementById('submit-status').textContent = 'Cannot reach server. Is the script still running?';
+    }
+  } else {
+    var dlBlob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(dlBlob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'decisions.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    document.getElementById('submit-status').textContent = 'JSON downloaded. Run the execute command.';
+  }
+}
+render();
+</script>
+</body>
+</html>
