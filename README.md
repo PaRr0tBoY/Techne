@@ -44,7 +44,7 @@ Six skills ship today; the structure is designed for you to add more.
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 | **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
 | **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
-| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 设计语言（Technical Editorial Minimalism + Tactile Motion）· 修改现有设计 / 重构设计双模式 · 符合性自检清单 · 引用仓库 design/ 参考文件 |
+| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 设计语言（Technical Editorial Minimalism + Tactile Motion）· 修改现有设计 / 重构设计双模式 · 符合性自检清单 · 内置完整参考文件（DESIGN.md / tokens / CSS 变量 / v8 模板） |
 
 ---
 
@@ -180,9 +180,10 @@ Mechanical engineering assistant toolbox. Covers the full document lifecycle for
 npx skills@latest add -y -g PaRr0tBoY/Techne/skills/parrot-design
 ```
 
-让 AI 按 PaRr0tBoY.github.io 仓库 `design/` 目录下的设计规范完成设计任务。用法：用户说明是
-**修改现有设计**还是**重构设计**；最终目标都是产出符合规范的设计。规范本体留在仓库参考文件中
-（DESIGN.md、tokens、v8 模板），技能只描述文件结构与工作流，动手前必须先读参考文件。
+让 AI 按技能内置的设计规范（Design Language Document v7，风格代号 Technical Editorial
+Minimalism + Tactile Motion）完成设计任务。用法：用户说明是**修改现有设计**还是**重构设计**；
+最终目标都是产出符合规范的设计。规范本体打包在技能 `references/` 中（DESIGN.md、tokens、
+CSS 变量、v8 模板），技能只描述文件结构与工作流，动手前必须先读参考文件。
 
 ```bash
 # 修改现有设计：把 tools/ 下某页面按规范改到符合为止
