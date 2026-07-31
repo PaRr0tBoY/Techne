@@ -44,7 +44,7 @@ Six skills ship today; the structure is designed for you to add more.
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 | **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
 | **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
-| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 设计语言（Technical Editorial Minimalism + Tactile Motion）· 修改现有设计 / 重构设计双模式 · 符合性自检清单 · 内置完整参考文件（DESIGN.md / tokens / CSS 变量 / v8 模板） |
+| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 design language (Technical Editorial Minimalism + Tactile Motion) · modify-existing / redesign dual modes · compliance self-check list · bundled references (DESIGN.md / tokens / CSS variables / v8 template) |
 
 ---
 
@@ -180,14 +180,11 @@ Mechanical engineering assistant toolbox. Covers the full document lifecycle for
 npx skills@latest add -y -g PaRr0tBoY/Techne/skills/parrot-design
 ```
 
-让 AI 按技能内置的设计规范（Design Language Document v7，风格代号 Technical Editorial
-Minimalism + Tactile Motion）完成设计任务。用法：用户说明是**修改现有设计**还是**重构设计**；
-最终目标都是产出符合规范的设计。规范本体打包在技能 `references/` 中（DESIGN.md、tokens、
-CSS 变量、v8 模板），技能只描述文件结构与工作流，动手前必须先读参考文件。
+Let the AI complete design tasks according to the bundled design spec (Design Language Document v7, codename Technical Editorial Minimalism + Tactile Motion). Usage: the user states whether to **modify an existing design** or **redesign**; either way the goal is output that conforms to the spec. The spec is bundled in the skill's `references/` (DESIGN.md, tokens, CSS variables, v8 template); the skill only describes file structure and workflow — read the reference files before starting.
 
 ```bash
-# 修改现有设计：把 tools/ 下某页面按规范改到符合为止
-# 重构设计：按规范新建页面或整体重做现有设计
+# Modify an existing design: bring a page under tools/ into spec compliance
+# Redesign: build a new page or redo an existing design from scratch per the spec
 ```
 
 ---
