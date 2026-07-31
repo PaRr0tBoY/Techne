@@ -6,7 +6,7 @@
   <a href="https://skills.sh/PaRr0tBoY/Techne"><img src="https://skills.sh/b/PaRr0tBoY/Techne" alt="skills.sh"></a>
   <img src="https://img.shields.io/github/license/PaRr0tBoY/Techne" alt="License">
   <img src="https://img.shields.io/github/stars/PaRr0tBoY/Techne" alt="GitHub Stars">
-  <img src="https://img.shields.io/badge/skills-5-blue" alt="Skills">
+  <img src="https://img.shields.io/badge/skills-6-blue" alt="Skills">
   <img src="https://img.shields.io/badge/node.js-%3E%3D18-green" alt="Node.js">
 </p>
 
@@ -26,7 +26,7 @@ npx skills@latest add -y -g PaRr0tBoY/Techne
 
 A modular repository of skills and commands for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts. Each command is a prompt template in a `.md` file — drop them into your agent's folder and they work immediately.
 
-Five skills ship today; the structure is designed for you to add more.
+Six skills ship today; the structure is designed for you to add more.
 
 ---
 
@@ -44,6 +44,7 @@ Five skills ship today; the structure is designed for you to add more.
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 | **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
 | **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
+| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 设计语言（Technical Editorial Minimalism + Tactile Motion）· 修改现有设计 / 重构设计双模式 · 符合性自检清单 · 引用仓库 design/ 参考文件 |
 
 ---
 
@@ -173,6 +174,21 @@ Mechanical engineering assistant toolbox. Covers the full document lifecycle for
 
 **Collaboration modes:** each module adapts its interaction style — direct delivery for routine tasks, teaching for training, iterative for calculations, and structured checklist for inspections.
 
+## parrot-design
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/parrot-design
+```
+
+让 AI 按 PaRr0tBoY.github.io 仓库 `design/` 目录下的设计规范完成设计任务。用法：用户说明是
+**修改现有设计**还是**重构设计**；最终目标都是产出符合规范的设计。规范本体留在仓库参考文件中
+（DESIGN.md、tokens、v8 模板），技能只描述文件结构与工作流，动手前必须先读参考文件。
+
+```bash
+# 修改现有设计：把 tools/ 下某页面按规范改到符合为止
+# 重构设计：按规范新建页面或整体重做现有设计
+```
+
 ---
 
 ## Commands
@@ -199,6 +215,8 @@ techne/
 │   │   ├── SKILL.md
 │   │   ├── scripts/
 │   │   └── references/
+│   ├── parrot-design/
+│   │   └── SKILL.md
 │   ├── vivaldi-browser/
 │   │   ├── SKILL.md
 │   │   └── scripts/
