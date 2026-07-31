@@ -216,7 +216,8 @@ techne/
 │   │   ├── scripts/
 │   │   └── references/
 │   ├── parrot-design/
-│   │   └── SKILL.md
+│   │   ├── SKILL.md
+│   │   └── references/
 │   ├── vivaldi-browser/
 │   │   ├── SKILL.md
 │   │   └── scripts/

@@ -1,0 +1,48 @@
+/* Design Language Document · v7 的设计 token */
+/* 由 Design MD Editor 生成 */
+
+:root {
+  /* 颜色 */
+  --bg: #20211f;
+  --surface: #282925;
+  --surface-2: rgba(255,255,255,.035);
+  --ink: #e8e6de;
+  --muted: #aaa79e;
+  --faint: #77756e;
+  --line: rgba(232,230,222,.14);
+  --line-strong: rgba(232,230,222,.24);
+  --grid: rgba(232,230,222,.10);
+  --accent: #6aa99f;
+  --accent-soft: rgba(106,169,159,.15);
+  --accent-ink: #17201e;
+  --shadow: rgba(0,0,0,.18);
+
+  /* 排版 - 字体家族 */
+  --font-sans: JetBrains Mono NF, a more engineering-oriented alternative;
+  --font-mono: Not specified;
+  --font-sans-sc: Not specified;
+
+  /* 间距 */
+  --spacing-dot-grid: 19px;
+  --spacing-nav-safe: 72px;
+  --spacing-hero-block: 12px;
+  --spacing-card-padding: 22px;
+  --spacing-section: 76px;
+  --spacing-bento-gap: 12px;
+
+  /* 圆角 */
+  --radius-card: 14px;
+  --radius-small: 8px;
+  --radius-pill: 999px;
+
+  /* 阴影 */
+  --shadow-card: 0 4px 14px var(--shadow);
+  --shadow-dropdown: 0 14px 35px var(--shadow);
+  --shadow-panel: 0 16px 40px var(--shadow);
+
+  /* 布局 */
+  --layout-section-gap: The Fold reserves 72px of top safety spacing for the floating navigation; Hero vertical padding is 12px.;
+  --layout-card-padding: 22px; floating cards use the shared matte surface language with a 1px border, unified radius token, and restrained shadow.;
+  --layout-element-gap: The background dot matrix uses a 19px interval.;
+  --layout-max-width: The Footer declares its own max-width with margin:auto and independent padding; no numeric maximum width is specified.;
+}

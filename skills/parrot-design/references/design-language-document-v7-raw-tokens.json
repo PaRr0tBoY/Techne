@@ -1,0 +1,282 @@
+{
+  "meta": {
+    "name": "Design Language Document · v7",
+    "description": "Style codename: Technical Editorial Minimalism + Tactile Motion. Quiet structure, paper-like material, dispersed accents rather than concentrated decoration, invisible editing, and restrained but lively motion.",
+    "theme": "dark"
+  },
+  "colors": [
+    {
+      "name": "Background",
+      "value": "#20211f",
+      "token": "--bg",
+      "role": "Global page background in dark mode"
+    },
+    {
+      "name": "Surface",
+      "value": "#282925",
+      "token": "--surface",
+      "role": "Opaque matte paper-card surface for floating navigation, menus, cards, and mobile menu panels"
+    },
+    {
+      "name": "Surface 2",
+      "value": "rgba(255,255,255,.035)",
+      "token": "--surface-2",
+      "role": "Subtle raised surface for cards and media slots"
+    },
+    {
+      "name": "Ink",
+      "value": "#e8e6de",
+      "token": "--ink",
+      "role": "Primary text color in dark mode"
+    },
+    {
+      "name": "Muted",
+      "value": "#aaa79e",
+      "token": "--muted",
+      "role": "Secondary text and labels"
+    },
+    {
+      "name": "Faint",
+      "value": "#77756e",
+      "token": "--faint",
+      "role": "Tertiary text, placeholders, and tags"
+    },
+    {
+      "name": "Line",
+      "value": "rgba(232,230,222,.14)",
+      "token": "--line",
+      "role": "Default border and divider color"
+    },
+    {
+      "name": "Line Strong",
+      "value": "rgba(232,230,222,.24)",
+      "token": "--line-strong",
+      "role": "Stronger border for hover and emphasis"
+    },
+    {
+      "name": "Grid",
+      "value": "rgba(232,230,222,.10)",
+      "token": "--grid",
+      "role": "Background dot-matrix grid color"
+    },
+    {
+      "name": "Accent",
+      "value": "#6aa99f",
+      "token": "--accent",
+      "role": "Theme-color linework for Hero background curves and primary actions"
+    },
+    {
+      "name": "Accent Soft",
+      "value": "rgba(106,169,159,.15)",
+      "token": "--accent-soft",
+      "role": "Subtle accent tint for hover states and fills"
+    },
+    {
+      "name": "Accent Ink",
+      "value": "#17201e",
+      "token": "--accent-ink",
+      "role": "Text color on accent backgrounds"
+    },
+    {
+      "name": "Shadow",
+      "value": "rgba(0,0,0,.18)",
+      "token": "--shadow",
+      "role": "Restrained shadow for floating elements"
+    }
+  ],
+  "gradients": [],
+  "typography": {
+    "fontFamilies": [
+      {
+        "name": "IBM Plex Sans",
+        "token": "--font-sans",
+        "substitute": "JetBrains Mono NF, a more engineering-oriented alternative",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "role": "English body copy and UI"
+      },
+      {
+        "name": "IBM Plex Mono",
+        "token": "--font-mono",
+        "substitute": "Not specified",
+        "weights": [
+          400,
+          500,
+          600
+        ],
+        "role": "Monospace text, code, and labels"
+      },
+      {
+        "name": "IBM Plex Sans SC",
+        "token": "--font-sans-sc",
+        "substitute": "Not specified",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "role": "Chinese text"
+      }
+    ],
+    "typeScale": []
+  },
+  "spacing": [
+    {
+      "name": "Background dot interval",
+      "value": "19px",
+      "token": "--spacing-dot-grid"
+    },
+    {
+      "name": "Fold navigation safety spacing",
+      "value": "72px",
+      "token": "--spacing-nav-safe"
+    },
+    {
+      "name": "Hero vertical padding",
+      "value": "12px",
+      "token": "--spacing-hero-block"
+    },
+    {
+      "name": "Card padding",
+      "value": "22px",
+      "token": "--spacing-card-padding"
+    },
+    {
+      "name": "Section gap",
+      "value": "76px",
+      "token": "--spacing-section"
+    },
+    {
+      "name": "Bento gap",
+      "value": "12px",
+      "token": "--spacing-bento-gap"
+    }
+  ],
+  "radius": [
+    {
+      "name": "Unified floating-card radius",
+      "value": "14px",
+      "token": "--radius-card"
+    },
+    {
+      "name": "Small control radius",
+      "value": "8px",
+      "token": "--radius-small"
+    },
+    {
+      "name": "Pill radius",
+      "value": "999px",
+      "token": "--radius-pill"
+    }
+  ],
+  "shadows": [
+    {
+      "name": "Floating-card shadow",
+      "value": "0 4px 14px var(--shadow)",
+      "token": "--shadow-card"
+    },
+    {
+      "name": "Dropdown shadow",
+      "value": "0 14px 35px var(--shadow)",
+      "token": "--shadow-dropdown"
+    },
+    {
+      "name": "Mobile panel shadow",
+      "value": "0 16px 40px var(--shadow)",
+      "token": "--shadow-panel"
+    }
+  ],
+  "layout": {
+    "sectionGap": "The Fold reserves 72px of top safety spacing for the floating navigation; Hero vertical padding is 12px.",
+    "cardPadding": "22px; floating cards use the shared matte surface language with a 1px border, unified radius token, and restrained shadow.",
+    "elementGap": "The background dot matrix uses a 19px interval.",
+    "maxContentWidth": "The Footer declares its own max-width with margin:auto and independent padding; no numeric maximum width is specified."
+  },
+  "components": [
+    {
+      "name": "Editable Container Control",
+      "role": "Low-chrome editing control",
+      "description": "The container itself is the control. Do not nest another input, border, or background layer inside a container. This rule extends beyond text inputs: any component—code blocks, media slots, data panels—must not be wrapped in an additional card or surface container when it already sits inside a card. A code block inside a card should render directly as the code block, not as a card within a card.\n\nEditing must not alter geometry. Use contenteditable, not <input>. This is the key conclusion of this revision: <input> inherently introduces two problems—its width is fixed and does not match the actual text length, causing the container to jump before and after editing; and default styles easily introduce borders or highlights. contenteditable gives the same element editing capability in place. Before and after editing, container size, background color, and font size remain identical; only the caret and selection become visible.\n\nTab renaming and the navigation site title use this implementation. They support double-click editing as well as keyboard entry after focus with Enter or F2.\n\nAffordance is implicit: do not use text or graphics to announce “this can be clicked.” Double-click or focus and press Enter to edit. Discoverability comes from the interaction itself, not decoration."
+    },
+    {
+      "name": "Paper Surface",
+      "role": "Matte paper material for cards and floating UI",
+      "description": "The global background combines a fine dot matrix with extremely light noise: a 19px interval, approximately 0.85px dots at low contrast, and SVG turbulence noise at opacity 0.035.\n\nThis is paper, not glass. Glassmorphism—backdrop-filter: blur() combined with a translucent background and a large shadow—is explicitly prohibited. The floating navigation originally used that combination, but it conflicted with the paper dot-and-noise foundation and was judged “too abrupt.”\n\nThe navigation, .menu, and .card use the same matte material: solid var(--surface), a 1px border, a unified border-radius token, and a restrained shadow. Any element floating above the page—navigation bar, dropdown menu, or mobile menu panel—must retain this matte-card material language. Floating does not authorize a separate glass treatment."
+    },
+    {
+      "name": "Dividers",
+      "role": "Minimal use of visible separators to reduce visual clutter",
+      "description": "Excessive lines make a design look busy. Prefer spacing, grouping, and surface-level differences to distinguish regions over visible dividers.\n\n- Between cards: Use the bento gap and distinct surface backgrounds; do not insert <hr> or hard-border separators between cards.\n\n- Inside a card: Separate sections with padding and typographic hierarchy. If a divider is unavoidable, use a single 1px line at var(--line) opacity, and only between semantically distinct blocks.\n\n- In lists: Omit dividers between items when spacing alone provides sufficient separation. When a list is dense and dividers are necessary, use the lowest contrast available and keep them to 1px.\n\n- Inline editing areas: Follow the Editable Container Control rule—no inner borders or separator lines. The container surface itself defines the boundary."
+    },
+    {
+      "name": "Icon-First Controls",
+      "role": "Compact, icon-priority functional buttons",
+      "description": "When a functional button's action can be clearly expressed by a universally recognized icon, use the icon alone without a text label. The button's function is conveyed through the icon itself; a text description appears only on hover after a short delay via the title attribute, with aria-label providing accessibility fallback.\n\n- Applicable scenarios: Download, share, bookmark, search toggle, theme toggle, language switch, close, and similar actions with well-established icon conventions.\n\n- Not applicable: Actions with less intuitive semantics (e.g., dropdown menu items, mobile navigation panel entries) should retain icon-plus-text treatment for clarity.\n\n- Icon-only buttons must carry both aria-label and title, dynamically updated when the language changes."
+    },
+    {
+      "name": "Decorative Accent System",
+      "role": "Distributed visual punctuation across the page",
+      "description": "Curves, dots, and geometric forms are dispersed accents on backgrounds and cards, not an illustration concentrated in one location. An earlier version stacked all decoration into one composite SVG scene in the Hero area, which could be misread as “an illustration slot” rather than a page-wide accent method.\n\nSplit the same visual language—thin-line curves, small dots, dashed folded corners, and rounded small squares—into small pieces placed across the Hero background, logo mark, and corners of multiple cards. Each instance remains restrained, generally at opacity between 0.2 and 0.55; together they create the impression of one system.\n\nHero background curves must use a continuous single-stroke line, not a dashed line. Dashed lines resemble reference lines or grid guides rather than hand-drawn marks. Use the theme color var(--accent), not a neutral-gray line color. A thinner, lower-opacity ghost line may be layered to create a slight brushstroke feel, but the main line must remain one continuous stroke. The intended effect is “a casually drawn stroke,” not a precise geometric curve: control points may be asymmetrical to avoid an appearance generated by a mathematical formula."
+    },
+    {
+      "name": "Floating Navigation Bar",
+      "role": "Persistent site navigation with contextual controls",
+      "description": "The navigation bar is floating rather than flush-top fixed: use position: fixed, leave whitespace above and at both sides, and do not make it full-width edge-to-edge.\n\nWhen scrolling down, hide it by translating it out of the viewport with translateY. When scrolling up or returning to the top of the page at scrollY ≤ ~24px, show it again. When hiding, simultaneously collapse every expanded child panel—search, menu, and mobile navigation panel—to avoid the strange state where the navigation bar leaves the screen while a dropdown remains suspended.\n\nThe fold reserves 72px of top safety spacing for this floating navigation so initial rendering does not cover content.\n\nApply justify-content: space-between directly to the navigation container. Do not rely on a child element’s margin-inline-end: auto to push other elements apart. That approach fails at responsive breakpoints when an element is hidden, causing all elements to pile up on the left while the right side is empty. The brand area, navigation items, and action area must each continue to occupy their respective ends at both wide and narrow widths.\n\nThe left side contains the site icon—a geometric logo mark that is also part of the distributed-accent system—and an editable site title. The center contains regular navigation items on desktop; at ≤760px, these move into the mobile menu. The right side contains search, language, light/dark mode, theme color, and the mobile hamburger menu."
+    },
+    {
+      "name": "Navigation Icon Controls",
+      "role": "Compact language, appearance, and theme controls",
+      "description": "In the navigation bar, language, light/dark mode, and theme controls retain icons only and do not include text. The navigation already includes brand, navigation items, and search, so additional text would feel crowded.\n\nThis is a contextual exception, not a reversal of the general principle that ambiguous semantics should include text. The icons are sufficiently conventional—globe for language, sun/moon for light/dark mode, palette for theme—and aria-label and title provide accessibility fallback.\n\nIn other contexts, such as dropdown menu actions and the mobile navigation panel, follow the principle that less-direct semantics require text. Use icon and text together consistently; do not mix icon-only and icon-plus-text treatments there.\n\nIcon buttons without visible text require both aria-label and title, dynamically updated when the language changes, including the current theme name and current light/dark state."
+    },
+    {
+      "name": "Search Control",
+      "role": "Expandable navigation search",
+      "description": "The default state shows only an icon button. On click, it expands rightward into a borrowing-space input field.\n\nDo not allow a circular icon background and a rectangular highlighted input field to clash as two competing shapes. When expanded, place the icon and input together inside one unified rounded pill rather than maintaining separate visual boundaries.\n\nThe input itself does not use the default :focus-visible outline, because that outline is a square-cornered rectangle that conflicts with the surrounding rounded environment. The pill container border already communicates the current search state and does not need another outline layer.\n\nThe icon reuses the “form is state” motion language: search and close use two switchable SVGs and share the same icon-state switching logic as the hamburger menu and + button."
+    },
+    {
+      "name": "Mobile Navigation Menu",
+      "role": "Responsive navigation panel at ≤760px",
+      "description": "At ≤760px, the hamburger button changes into a close icon using the shared icon-morph animation.\n\nThe submenu must be a floating layer and must not enter document flow or push page content downward. An earlier implementation stacked four links vertically and directly increased page height; this is an explicit bug to avoid.\n\nThe floating layer sits close to the hamburger button, expands right-aligned, and uses a bento-style 2×2 grid of cards. Each item includes a small icon and text, rather than forming a single-column text-only list. This reuses the existing bento visual language while making touch targets larger and easier to tap."
+    },
+    {
+      "name": "Motion System",
+      "role": "Restrained, accessible interaction feedback",
+      "description": "Icon morphing is shared across the site: + ⇄ ×, hamburger ⇄ close, and search ⇄ close use the same transformation logic, instantiated separately by context.\n\nViewport reveal fades sections in as they enter the viewport using opacity plus translateY. It triggers once and does not repeat.\n\nLoading uses a skeleton screen with structural placeholder stripes, not spinning indicators or ellipsis animation.\n\nFloating-navigation visibility transitions use transform, not abrupt display switching.\n\nAll motion respects prefers-reduced-motion. Under prefers-reduced-motion, site-wide animation duration is reduced to near 0.\n\nEvery instantaneous UI change—page transitions, background color shifts, state toggles, panel open/close, theme switching—must be softened with a CSS transition. Use transition-all duration-200 ease-out as the default, adjusting duration per context but never exceeding 400ms.\n\nWhen the active tab changes, the background highlight indicator slides from the old position to the new position using transform: translateX with a CSS transition. The indicator is a single absolutely-positioned element whose width and translateX are updated to match the target tab's dimensions and offset.\n\nWhere the performance cost is low and no layout or paint recalculation is triggered, prefer transform and opacity to add micro-animations that make the page feel alive without drawing attention away from content.\n\nThese animations are supplementary, not structural. They must never block interaction, delay content display, or run continuously without user initiation.\n\n- Apply transitions to background-color, color, border-color, opacity, and transform on interactive elements by default.\n\n- Page-level or route transitions should use a brief crossfade (opacity) rather than abrupt replacements.\n\n- All softened transitions must respect prefers-reduced-motion, collapsing to near-zero duration when the user prefers reduced motion.\n\n- Use only opacity and transform for animated properties; avoid transitioning layout-triggering properties like width, height, left, or margin.\n\n- Use transform only; do not animate left, width, or margin, which trigger layout recalculations.\n\n- Match the transition duration to the site's general motion pace—typically 200–300ms with an ease-out curve.\n\n- On mobile, the same slider logic applies to the bottom tab bar or segmented controls.\n\n- Toggle switches: A subtle translateX on the thumb with a background color transition.\n\n- Selection states: A brief scale pulse (transform: scale(0.96 → 1)) on click or tap to provide tactile feedback.\n\n- Hover expansions: Card or row hover states that slightly lift (translateY(-2px)) or scale, accompanied by a shadow change.\n\n- Accent reveals: Decorative dots or curves that fade in with a staggered delay as their parent card enters the viewport."
+    },
+    {
+      "name": "Footer Elastic Pull-Down",
+      "role": "Simulated bottom-of-page elastic interaction",
+      "description": "This interaction references diabrowser.com’s “pulling at the bottom creates an elastic rebound” effect, simulated through ordinary webpage scrolling events because browsers do not expose a native pull-distance interface.\n\nIt must use fixed positioning above page content rather than new document-flow content. Adding content in document flow continuously changes document.scrollHeight, which is also used to determine whether the page has reached the bottom; this feedback loop causes stutter and inconsistent behavior. With position: fixed, the feedback loop is fully removed.\n\nUse discrete layered reveal instead of continuous pixel-level interpolation. Changing height directly on each wheel or touch event with a CSS transition continuously interrupts and redirects transition targets, producing visible stutter. Instead, reveal and hide by thresholds: five tower-card layers, each with independent transform and opacity transitions. Each layer triggers one clean transition only when crossing its threshold.\n\nMap accumulated pull distance through an exponential easing function to the displayed value. Resistance increases as the user pulls farther, approaching a maximum without abruptly hard-stopping, which better matches the intuition of elasticity than linear mapping.\n\nThe shape is a layered tower, not one large gradient triangle. Five layers stack from wide to narrow, representing base to tip. They appear sequentially during pull-down and retract in reverse order after approximately 220ms without input.\n\nAs an easter egg, if the tower is fully expanded at its upper limit and the user releases it, the tower retracts and the page smoothly scrolls back to the top. This is an optional detail: if it feels too playful, remove the wasFull condition lines in release().\n\nThis remains a simulation using wheel and touch events rather than native browser overscroll physics. Its feel on trackpads and touchscreens is somewhat less smooth than native behavior. Matching diabrowser’s smoothness completely would generally require a dedicated smooth-scrolling library, such as Lenis, to take over page scrolling; this template does not currently do that."
+    },
+    {
+      "name": "Bento Grid",
+      "role": "Content-weighted page composition",
+      "description": "The bento grid is composed of rounded-rectangle cards of varying sizes. Card size is determined by content importance: higher-importance cards occupy larger areas, while cards of equal importance share the same size. Regardless of the number of cards, the grid must be fully filled with no empty gaps or missing corners.\n\nThe template additionally includes two image-placeholder grid positions for later replacement with real images or screenshots: one 4:3 position in the Hero and one 21:9 wide banner position in the bento grid.\n\nDimensions and proportions follow three principles: container size matches content expectations; interactive-state size changes match the element's own proportions; and distance communicates relatedness."
+    },
+    {
+      "name": "Fold and Hero",
+      "role": "Complete desktop first-screen composition",
+      "description": "On desktop, Tab navigation plus the Hero fill one screen with min-height:100svh. Avoid a container taller than the viewport where only half of a box is visible in the first screen.\n\nOn mobile, this rule is not forced because mobile is inherently scroll-based; forcing it can create empty space when content is insufficiently tall.\n\nThe floating navigation requires safety spacing above the Hero. This can make the desktop composition feel too low, with more top whitespace than visually necessary. This revision tightened two values: reserved spacing changed from approximately 86px to 72px, and the Hero’s vertical padding changed from 34px to 12px. This places more centering logic in the available space itself rather than stacking it across two padding layers.\n\nIf the composition still feels too low after adjustment, a possible next step is to replace “brand area/navigation items fixed at the top, Hero centered separately” with “Tab plus Hero centered as one unit in the remaining space.” That would place the Tab in a nonstandard position rather than directly below the navigation bar, so confirm whether that placement meets expectations before changing it."
+    },
+    {
+      "name": "Horizontal Scroll Container",
+      "role": "Touch-safe horizontal navigation and overflow content",
+      "description": "Touch horizontal-scroll containers must explicitly declare overflow-y:hidden and touch-action:pan-x.\n\nUsing only overflow-x:auto allows browsers to infer overflow-y:auto. Even without vertical overflow, touch devices may then allow the entire horizontal container to be dragged vertically. The Tab bar encountered this issue. Apply this rule to all horizontal scrolling containers in the template."
+    },
+    {
+      "name": "Footer",
+      "role": "Page-ending content aligned with the main shell",
+      "description": "The Footer must retain the same horizontal whitespace as .shell. It must not lose padding simply because it is outside the .shell container.\n\nAn earlier version placed the footer as a sibling of .shell, where it did not inherit inner padding and nearly touched both edges. The footer now declares its own max-width, margin:auto, and independent padding rather than relying on its parent container."
+    },
+    {
+      "name": "Internationalization and Accessibility",
+      "role": "Bilingual, keyboard-accessible, semantic interface",
+      "description": "For Chinese and English bilingual content, translatable copy uses paired data-zh and data-en spans. JavaScript switches them with the hidden attribute, removing inactive content from the accessibility tree rather than merely hiding it with CSS. User-created content, including Tab names and the site title, is not wrapped in translation pairs.\n\nUse semantic navigation and ARIA state: aria-expanded, aria-current, role=\"menu\", and role=\"menuitem\"."
+    }
+  ]
+}

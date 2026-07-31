@@ -1,45 +1,45 @@
 ---
 name: parrot-design
 description: >
-  让 AI 按照 PaRr0tBoY.github.io 仓库 design/ 目录下的设计规范（Design Language Document v7，
-  风格代号 Technical Editorial Minimalism + Tactile Motion）完成设计任务。用法：用户说明是
-  修改现有设计还是重构设计；最终目标都是产出符合规范的设计。规范本体在仓库参考文件中，技能内
-  不转写规范内容，动手前必须先读参考文件再按参考风格设计。只要用户提到设计规范、按规范、
-  重构/重做、新建页面/工具页、修改现有设计、风格统一，或在 PaRr0tBoY.github.io 仓库内要求
-  新建/修改任何 HTML 页面、工具页、组件、界面，都应使用本技能。
+  让 AI 按照内置设计规范（Design Language Document v7，风格代号 Technical Editorial
+  Minimalism + Tactile Motion）完成设计任务。用法：用户说明是修改现有设计还是重构设计；
+  最终目标都是产出符合规范的设计。规范本体在技能 references/ 中，SKILL.md 只说明文件结构
+  与工作流，不转写规范内容；动手前必须先读 references/ 再按参考风格设计。只要用户提到
+  设计规范、按规范、重构/重做、新建页面/工具页、修改现有设计、风格统一，或在
+  PaRr0tBoY.github.io 仓库内要求新建/修改任何 HTML 页面、工具页、组件、界面，都应使用本技能。
 ---
 
 # Parrot Design
 
-本技能让 AI 根据 PaRr0tBoY.github.io 仓库 `design/` 目录下的设计规范完成用户的设计要求。
-技能内**不转写规范内容**——规范本体在参考文件中，先读参考文件，再按参考风格设计。
+本技能让 AI 根据内置设计规范完成用户的设计要求。
+技能内**不转写规范内容**——规范本体在 `references/` 中，先读参考文件，再按参考风格设计。
 
 ## 参考文件结构
 
-规范文件位于仓库的 `design/` 目录（v7 设计语言，不可变发布版）：
+规范文件位于本技能目录的 `references/`（v7 设计语言，不可变发布版）：
 
 | 文件 | 内容 | 何时读 |
 |---|---|---|
-| `design-language-document-v7-DESIGN.md` | 设计语言权威文档：全部 token、组件规范、动效系统、Do's and Don'ts | **必读**（每次设计前） |
-| `design-language-document-v7-variables.css` | 可直接使用的 CSS 变量（颜色/字体/间距/圆角/阴影） | 取 token 值时 |
-| `design-language-document-v7-tokens.json` | W3C 格式设计 token | 需要结构化 token 时 |
-| `design-language-document-v7-raw-tokens.json` | 原始 token，含组件定义 | 需要组件级细节时 |
-| `design-language-document-v7-theme.css` | Tailwind `@theme` 形式 | Tailwind 项目 |
-| `design-template-v8.html` | v8 完整参考实现（自包含单文件 HTML） | **重构设计必读**；需要交互/组件参考时 |
-| `README.md` | 版本说明（不可变发布版；改派生文件需先改 DESIGN.md） | 可选 |
+| `references/design-language-document-v7-DESIGN.md` | 设计语言权威文档：全部 token、组件规范、动效系统、Do's and Don'ts | **必读**（每次设计前） |
+| `references/design-language-document-v7-variables.css` | 可直接使用的 CSS 变量（颜色/字体/间距/圆角/阴影） | 取 token 值时 |
+| `references/design-language-document-v7-tokens.json` | W3C 格式设计 token | 需要结构化 token 时 |
+| `references/design-language-document-v7-raw-tokens.json` | 原始 token，含组件定义 | 需要组件级细节时 |
+| `references/design-language-document-v7-theme.css` | Tailwind `@theme` 形式 | Tailwind 项目 |
+| `references/design-template-v8.html` | v8 完整参考实现（自包含单文件 HTML） | **重构设计必读**；需要交互/组件参考时 |
+| `references/README.md` | 版本说明（不可变发布版；改派生文件需先改 DESIGN.md） | 可选 |
 
 ### 如何定位规范文件
 
-1. 当前工作目录在 PaRr0tBoY.github.io 仓库内 → 使用仓库 `design/` 目录（若已在 `design/` 内则用当前目录）。
-2. 不在仓库内 → 用 `C:\Users\Acid\Documents\repo\PaRr0tBoY.github.io\design\`（或 `~/Documents/repo/PaRr0tBoY.github.io/design/`）。
-3. 找不到 → 询问用户仓库位置。**不要凭记忆或训练数据推断规范内容**。
+1. 本技能目录下的 `references/`（与 `SKILL.md` 同级）。技能触发后先解析技能自身路径，再读 `references/`。
+2. 若当前会话把技能挂到了别名路径，仍以**本技能目录**内的 `references/` 为准，不要去仓库 `design/` 找替代副本（仓库 `design/` 可与本包同步，但执行时以技能内 references 为唯一事实来源）。
+3. 找不到 `references/` → 停止并向用户说明技能安装不完整。**不要凭记忆或训练数据推断规范内容**。
 
 ## 工作流
 
 ### 第 1 步：读规范（任何模式都必须）
 
-必读 `design-language-document-v7-DESIGN.md`（约 22KB，一次读完）。涉及交互、组件、动效时
-再读 `design-template-v8.html` 参考实现。规范文件是唯一事实来源：颜色、字体、间距、圆角、
+必读 `references/design-language-document-v7-DESIGN.md`（一次读完）。涉及交互、组件、动效时
+再读 `references/design-template-v8.html` 参考实现。规范文件是唯一事实来源：颜色、字体、间距、圆角、
 阴影等所有取值都从参考文件取，不靠记忆。
 
 ### 第 2 步：确定模式
@@ -70,7 +70,7 @@ description: >
 
 目标：从零（或推倒重做）创建符合规范的设计。
 
-1. 通读 DESIGN.md 和 design-template-v8.html，建立完整风格认知（风格语言、组件、交互模式）。
+1. 通读 `references/design-language-document-v7-DESIGN.md` 和 `references/design-template-v8.html`，建立完整风格认知（风格语言、组件、交互模式）。
 2. 新建设计时沿用仓库惯例：自包含单文件 HTML（内联 CSS/JS，字体可引 CDN）。
 3. 复用规范的 token 和组件语言：浮动导航、bento 卡片、纸感材质、分散装饰、图标变形、双语结构、动效系统。
 4. 内容按需求全新设计，但所有视觉决策必须落在规范框架内。
@@ -78,7 +78,7 @@ description: >
 
 ## 符合性自检
 
-对照 DESIGN.md 的对应章节逐项检查（以参考文件为准，下列条目只是检查点，不是规范全文）：
+对照 `references/design-language-document-v7-DESIGN.md` 的对应章节逐项检查（以参考文件为准，下列条目只是检查点，不是规范全文）：
 
 - **Colors**：颜色全部来自规范 token；无纯黑 `#000` / 纯白 `#FFF`；默认 Verdigris 主题，五主题（Graphite/Cobalt/Verdigris/Amber/Violet）明暗两态都可用
 - **Typography**：IBM Plex Sans / Mono / Sans SC；中文避开 Light 字重；字号层级用 `--type-*` token

@@ -1,0 +1,33 @@
+/* Design Language Document · v7 的 Tailwind CSS @theme */
+/* 由 Design MD Editor 生成 */
+
+@theme {
+  --bg: #20211f;
+  --surface: #282925;
+  --surface-2: rgba(255,255,255,.035);
+  --ink: #e8e6de;
+  --muted: #aaa79e;
+  --faint: #77756e;
+  --line: rgba(232,230,222,.14);
+  --line-strong: rgba(232,230,222,.24);
+  --grid: rgba(232,230,222,.10);
+  --accent: #6aa99f;
+  --accent-soft: rgba(106,169,159,.15);
+  --accent-ink: #17201e;
+  --shadow: rgba(0,0,0,.18);
+  --font-sans: JetBrains Mono NF, a more engineering-oriented alternative;
+  --font-mono: Not specified;
+  --font-sans-sc: Not specified;
+  --spacing-background-dot-interval: 19px;
+  --spacing-fold-navigation-safety-spacing: 72px;
+  --spacing-hero-vertical-padding: 12px;
+  --spacing-card-padding: 22px;
+  --spacing-section-gap: 76px;
+  --spacing-bento-gap: 12px;
+  --radius-card: 14px;
+  --radius-small: 8px;
+  --radius-pill: 999px;
+  --shadow-card: 0 4px 14px var(--shadow);
+  --shadow-dropdown: 0 14px 35px var(--shadow);
+  --shadow-panel: 0 16px 40px var(--shadow);
+}

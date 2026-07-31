@@ -1,0 +1,189 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Design tokens for Design Language Document · v7",
+  "meta": {
+    "name": "Design Language Document · v7",
+    "description": "Style codename: Technical Editorial Minimalism + Tactile Motion. Quiet structure, paper-like material, dispersed accents rather than concentrated decoration, invisible editing, and restrained but lively motion.",
+    "theme": "dark"
+  },
+  "color": {
+    "--bg": {
+      "$value": "#20211f",
+      "$type": "color",
+      "$description": "Global page background in dark mode"
+    },
+    "--surface": {
+      "$value": "#282925",
+      "$type": "color",
+      "$description": "Opaque matte paper-card surface for floating navigation, menus, cards, and mobile menu panels"
+    },
+    "--surface-2": {
+      "$value": "rgba(255,255,255,.035)",
+      "$type": "color",
+      "$description": "Subtle raised surface for cards and media slots"
+    },
+    "--ink": {
+      "$value": "#e8e6de",
+      "$type": "color",
+      "$description": "Primary text color in dark mode"
+    },
+    "--muted": {
+      "$value": "#aaa79e",
+      "$type": "color",
+      "$description": "Secondary text and labels"
+    },
+    "--faint": {
+      "$value": "#77756e",
+      "$type": "color",
+      "$description": "Tertiary text, placeholders, and tags"
+    },
+    "--line": {
+      "$value": "rgba(232,230,222,.14)",
+      "$type": "color",
+      "$description": "Default border and divider color"
+    },
+    "--line-strong": {
+      "$value": "rgba(232,230,222,.24)",
+      "$type": "color",
+      "$description": "Stronger border for hover and emphasis"
+    },
+    "--grid": {
+      "$value": "rgba(232,230,222,.10)",
+      "$type": "color",
+      "$description": "Background dot-matrix grid color"
+    },
+    "--accent": {
+      "$value": "#6aa99f",
+      "$type": "color",
+      "$description": "Theme-color linework for Hero background curves and primary actions"
+    },
+    "--accent-soft": {
+      "$value": "rgba(106,169,159,.15)",
+      "$type": "color",
+      "$description": "Subtle accent tint for hover states and fills"
+    },
+    "--accent-ink": {
+      "$value": "#17201e",
+      "$type": "color",
+      "$description": "Text color on accent backgrounds"
+    },
+    "--shadow": {
+      "$value": "rgba(0,0,0,.18)",
+      "$type": "color",
+      "$description": "Restrained shadow for floating elements"
+    }
+  },
+  "gradient": {},
+  "typography": {
+    "fontFamilies": [
+      {
+        "name": "IBM Plex Sans",
+        "token": "--font-sans",
+        "substitute": "JetBrains Mono NF, a more engineering-oriented alternative",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "role": "English body copy and UI"
+      },
+      {
+        "name": "IBM Plex Mono",
+        "token": "--font-mono",
+        "substitute": "Not specified",
+        "weights": [
+          400,
+          500,
+          600
+        ],
+        "role": "Monospace text, code, and labels"
+      },
+      {
+        "name": "IBM Plex Sans SC",
+        "token": "--font-sans-sc",
+        "substitute": "Not specified",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "role": "Chinese text"
+      }
+    ],
+    "typeScale": []
+  },
+  "spacing": {
+    "--spacing-dot-grid": {
+      "$value": "19px",
+      "$type": "dimension",
+      "$description": "Background dot interval"
+    },
+    "--spacing-nav-safe": {
+      "$value": "72px",
+      "$type": "dimension",
+      "$description": "Fold navigation safety spacing"
+    },
+    "--spacing-hero-block": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Hero vertical padding"
+    },
+    "--spacing-card-padding": {
+      "$value": "22px",
+      "$type": "dimension",
+      "$description": "Card padding"
+    },
+    "--spacing-section": {
+      "$value": "76px",
+      "$type": "dimension",
+      "$description": "Section gap"
+    },
+    "--spacing-bento-gap": {
+      "$value": "12px",
+      "$type": "dimension",
+      "$description": "Bento gap"
+    }
+  },
+  "radius": {
+    "--radius-card": {
+      "$value": "14px",
+      "$type": "dimension",
+      "$description": "Unified floating-card radius"
+    },
+    "--radius-small": {
+      "$value": "8px",
+      "$type": "dimension",
+      "$description": "Small control radius"
+    },
+    "--radius-pill": {
+      "$value": "999px",
+      "$type": "dimension",
+      "$description": "Pill radius"
+    }
+  },
+  "shadow": {
+    "--shadow-card": {
+      "$value": "0 4px 14px var(--shadow)",
+      "$type": "shadow",
+      "$description": "Floating-card shadow"
+    },
+    "--shadow-dropdown": {
+      "$value": "0 14px 35px var(--shadow)",
+      "$type": "shadow",
+      "$description": "Dropdown shadow"
+    },
+    "--shadow-panel": {
+      "$value": "0 16px 40px var(--shadow)",
+      "$type": "shadow",
+      "$description": "Mobile panel shadow"
+    }
+  },
+  "layout": {
+    "sectionGap": "The Fold reserves 72px of top safety spacing for the floating navigation; Hero vertical padding is 12px.",
+    "cardPadding": "22px; floating cards use the shared matte surface language with a 1px border, unified radius token, and restrained shadow.",
+    "elementGap": "The background dot matrix uses a 19px interval.",
+    "maxContentWidth": "The Footer declares its own max-width with margin:auto and independent padding; no numeric maximum width is specified."
+  }
+}
