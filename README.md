@@ -6,7 +6,7 @@
   <a href="https://skills.sh/PaRr0tBoY/Techne"><img src="https://skills.sh/b/PaRr0tBoY/Techne" alt="skills.sh"></a>
   <img src="https://img.shields.io/github/license/PaRr0tBoY/Techne" alt="License">
   <img src="https://img.shields.io/github/stars/PaRr0tBoY/Techne" alt="GitHub Stars">
-  <img src="https://img.shields.io/badge/skills-6-blue" alt="Skills">
+  <img src="https://img.shields.io/badge/skills-7-blue" alt="Skills">
   <img src="https://img.shields.io/badge/node.js-%3E%3D18-green" alt="Node.js">
 </p>
 
@@ -26,7 +26,7 @@ npx skills@latest add -y -g PaRr0tBoY/Techne
 
 A modular repository of skills and commands for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts. Each command is a prompt template in a `.md` file — drop them into your agent's folder and they work immediately.
 
-Six skills ship today; the structure is designed for you to add more.
+Seven skills ship today; the structure is designed for you to add more.
 
 ---
 
@@ -43,6 +43,7 @@ Six skills ship today; the structure is designed for you to add more.
 | **[headless-debugger](skills/headless-debugger/)** | Any script | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 | **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
+| **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
 | **[parrot-design](skills/parrot-design/)** | Design profiles | User-specified design profile (Polaris) · tool-exported tokens in `source/` plus component adapters · cross-profile behavior components (i18n / ARIA / reduced-motion) · anti-templating rules |
 | **[memory-transformer](skills/memory/)** | Exam recall | Convert notes / textbook passages / wrong-answer entries into 5 memorizable formats: logic chains · mnemonics · decision trees · comparison tables · keyword formulas · conditions & exceptions · covers 考研 and general coursework |
 
@@ -156,6 +157,24 @@ python scripts/sync_upstream.py --execute decisions.json          # apply decisi
 
 ---
 
+## agentic-engineer
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/agentic-engineer
+```
+
+Mechanical engineering assistant toolbox. Covers the full document lifecycle for project plans, budgets, DFM reviews, CAPA, SOP, test plans, equipment sizing, maintenance schedules, and more — 16 branch commands with bilingual templates.
+
+```bash
+# Invoke a branch command (examples)
+/project-plan   # or /立项 — project proposal
+/budget         # or /预算 — budget & cost analysis
+/dfm            # or /可制造性 — design for manufacturability review
+/capa           # or /纠正预防 — corrective & preventive action
+```
+
+**Collaboration modes:** each module adapts its interaction style — direct delivery for routine tasks, teaching for training, iterative for calculations, and structured checklist for inspections.
+
 ## parrot-design
 
 ```bash
@@ -196,6 +215,10 @@ techne/
 ├── skills/
 │   ├── memory/
 │   │   └── SKILL.md
+│   ├── agentic-engineer/
+│   │   ├── SKILL.md
+│   │   ├── scripts/
+│   │   └── references/
 │   ├── parrot-design/
 │   │   ├── SKILL.md
 │   │   ├── evals/
