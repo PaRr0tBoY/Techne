@@ -1,0 +1,17 @@
+{
+  "id": "polaris",
+  "name": "Polaris",
+  "version": "v7",
+  "sourceArchive": "C:/Users/Acid/Downloads/Polaris-delivery.zip",
+  "sourceFiles": [
+    "source/design-language-document-v7-DESIGN.md",
+    "source/design-language-document-v7-raw-tokens.json",
+    "source/design-language-document-v7-theme.css",
+    "source/design-language-document-v7-tokens.json",
+    "source/design-language-document-v7-variables.css",
+    "source/README.md"
+  ],
+  "sourceMode": "extracted",
+  "adapterPath": "adapters",
+  "selection": "explicit-only"
+}

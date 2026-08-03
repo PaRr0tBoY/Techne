@@ -1,0 +1,62 @@
+{
+  "skill_name": "parrot-design",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "按 skill://parrot-design/references/ 下的 v7 设计语言（先读 design-language-document-v7-DESIGN.md 与 components/README.md 索引，再读与需求相关的组件文件）在 tools/ 新建一个『Markdown 速记』工具页 memo.html：左侧编辑区、右侧实时预览，支持明暗切换和中英双语。风格必须符合规范，输出自包含 HTML。页面结构按此需求设计，不需要 Hero 配图占位。",
+      "expected_output": "一个符合 v7 设计语言的自包含 HTML 工具页：使用规范 token 色板、IBM Plex 字体、哑光纸卡材质、中英双语结构，含编辑+预览双栏布局。",
+      "files": [],
+      "expectations": [
+        "输出为自包含 HTML（无外链 CSS/JS，Google Fonts CDN 除外）",
+        "使用 v7 暗色背景 token（#20211f 或等价 --bg 变量定义）",
+        "主题色为规范 Verdigris（#6aa99f 暗色 / #39756c 亮色）或五主题之一",
+        "未使用玻璃拟态（无 backdrop-filter）",
+        "未将纯 #000 / #FFF 用作背景或文字颜色",
+        "使用 IBM Plex 字体族（Plex Sans / Mono / Sans SC）",
+        "中英双语采用 data-zh / data-en + hidden 结构",
+        "包含 prefers-reduced-motion 处理",
+        "页面含明暗切换（light/dark 两套 token 或 data-mode 切换逻辑）",
+        "编辑区 + 预览区双栏布局存在",
+        "执行过程读取了 skill://parrot-design/references/ 下的规范文件（transcript 或输出体现）",
+        "与 design-template-v8.html 的逐字行重叠率 < 20%（程序化比对）",
+        "页面结构遵循 prompt 需求：无模板默认结构照搬（无未要求的 hero 配图占位、无未要求的模板装饰）"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "修改现有设计：tools/smartgoal.html（SMART 目标工坊）现在完全不符合仓库设计规范——配色、字体、卡片、动效都不是规范风格。按 skill://parrot-design/references/ 下的 v7 规范（先读 design-language-document-v7-DESIGN.md 与 components/README.md 索引，再读相关组件文件）把它改到符合为止，原有功能（SMART 目标输入、打分、结果展示）必须保留。",
+      "expected_output": "smartgoal.html 修改版：保留全部原有功能，视觉全面迁移到 v7 规范（token 色板、规范字体、纸卡材质、规范动效）。",
+      "files": [],
+      "expectations": [
+        "原有功能保留（SMART 目标输入表单、打分、结果展示仍在）",
+        "旧主题完全移除（Noto Serif SC / Noto Sans SC 与 #325235 主色不再出现）",
+        "使用 v7 暗色 token（#20211f 或等价 --bg 变量定义）",
+        "主题色为规范 Verdigris（#6aa99f 暗色 / #39756c 亮色）或五主题之一",
+        "未使用玻璃拟态（无 backdrop-filter）",
+        "使用 IBM Plex 字体族（Plex Sans / Mono / Sans SC）",
+        "包含 prefers-reduced-motion 处理",
+        "执行过程读取了 skill://parrot-design/references/ 下的规范文件（transcript 或输出体现）",
+        "与 design-template-v8.html 的逐字行重叠率 < 20%（程序化比对）"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "重构设计：tools/lookey.html 这个系统信息仪表盘不符合设计规范。按 skill://parrot-design/references/ 下的 v7 设计语言（先读 design-language-document-v7-DESIGN.md 与 components/README.md 索引，再读相关组件文件）整体重做，视觉和交互与规范一致，原有功能（指标卡、状态列表）保留。",
+      "expected_output": "lookey.html 重构版：原功能保留，整体视觉按 v7 设计语言重建（规范色板、纸感材质、bento 卡片、规范交互）。",
+      "files": [],
+      "expectations": [
+        "原有功能保留（指标卡、状态列表仍在）",
+        "旧深蓝仪表盘主题移除（#0b1020 / #7aa2ff 不再出现）",
+        "使用 v7 暗色 token（#20211f 或等价 --bg 变量定义）",
+        "主题色为规范 Verdigris（#6aa99f 暗色 / #39756c 亮色）或五主题之一",
+        "未使用玻璃拟态（无 backdrop-filter）",
+        "卡片为哑光纸材质（实色表面 + 1px 边框 + 14px 圆角或 --radius token）",
+        "使用 IBM Plex 字体族（Plex Sans / Mono / Sans SC）",
+        "包含 prefers-reduced-motion 处理",
+        "执行过程读取了 skill://parrot-design/references/ 下的规范文件（transcript 或输出体现）",
+        "与 design-template-v8.html 的逐字行重叠率 < 20%（程序化比对）",
+        "页面结构遵循 prompt 需求：仪表盘布局（指标卡/状态列表）按原功能组织，无模板页面骨架照搬"
+      ]
+    }
+  ]
+}

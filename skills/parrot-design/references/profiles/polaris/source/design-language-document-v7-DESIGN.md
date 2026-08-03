@@ -1,10 +1,3 @@
----
----
----
----
----
----
----
 # Design Language Document · v7
 
 > Style codename: **Technical Editorial Minimalism + Tactile Motion**. Quiet structure, paper-like material, dispersed accents rather than concentrated decoration, invisible editing, and restrained but lively motion.
@@ -372,10 +365,3 @@ When a page section contains large amounts of reading content or input fields wh
 - **Responsive adaptation:** A centered, constrained-width layout naturally adapts to mobile viewports, where the content simply expands to fill the available width.
 
 This constraint applies contextually, not universally. Dashboards, bento grids, and data-dense views may still use the full page width. The decision is content-driven: reading-heavy or short-input sections use constrained width; data-dense or card-grid sections use full width.
----
----
----
----
----
----
----

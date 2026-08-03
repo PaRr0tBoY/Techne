@@ -43,8 +43,8 @@ Six skills ship today; the structure is designed for you to add more.
 | **[headless-debugger](skills/headless-debugger/)** | Any script | Inject headless mode into interactive scripts (PS/Bash/Python/Node/Go/Ruby) · traverse every user flow · fix parse/runtime errors · CI-ready |
 | **[github-base-finder](skills/github-base-finder/)** | GitHub search | PRD decomposition · multi-strategy repo search · candidate evaluation · comparison matrix · batch search · awesome-list mining |
 | **[sync-upstream](skills/sync-upstream/)** | Fork sync | Upstream change analysis · conflict detection · interactive HTML report · per-file merge decisions · one-step interactive mode |
-| **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
-| **[parrot-design](skills/parrot-design/)** | PaRr0tBoY.github.io design language | v7 design language (Technical Editorial Minimalism + Tactile Motion) · modify-existing / redesign dual modes · compliance self-check list · bundled references (DESIGN.md / tokens / CSS variables / v8 template) |
+| **[parrot-design](skills/parrot-design/)** | Design profiles | User-specified design profile (Polaris) · tool-exported tokens in `source/` plus component adapters · cross-profile behavior components (i18n / ARIA / reduced-motion) · anti-templating rules |
+| **[memory-transformer](skills/memory/)** | Exam recall | Convert notes / textbook passages / wrong-answer entries into 5 memorizable formats: logic chains · mnemonics · decision trees · comparison tables · keyword formulas · conditions & exceptions · covers 考研 and general coursework |
 
 ---
 
@@ -156,36 +156,21 @@ python scripts/sync_upstream.py --execute decisions.json          # apply decisi
 
 ---
 
-## agentic-engineer
-
-```bash
-npx skills@latest add -y -g PaRr0tBoY/Techne/skills/agentic-engineer
-```
-
-Mechanical engineering assistant toolbox. Covers the full document lifecycle for project plans, budgets, DFM reviews, CAPA, SOP, test plans, equipment sizing, maintenance schedules, and more — 16 branch commands with bilingual templates.
-
-```bash
-# Invoke a branch command (examples)
-/project-plan   # or /立项 — project proposal
-/budget         # or /预算 — budget & cost analysis
-/dfm            # or /可制造性 — design for manufacturability review
-/capa           # or /纠正预防 — corrective & preventive action
-```
-
-**Collaboration modes:** each module adapts its interaction style — direct delivery for routine tasks, teaching for training, iterative for calculations, and structured checklist for inspections.
-
 ## parrot-design
 
 ```bash
 npx skills@latest add -y -g PaRr0tBoY/Techne/skills/parrot-design
 ```
 
-Let the AI complete design tasks according to the bundled design spec (Design Language Document v7, codename Technical Editorial Minimalism + Tactile Motion). Usage: the user states whether to **modify an existing design** or **redesign**; either way the goal is output that conforms to the spec. The spec is bundled in the skill's `references/` (DESIGN.md, tokens, CSS variables, v8 template); the skill only describes file structure and workflow — read the reference files before starting.
+Design pages, tool pages, components, and interfaces against a user-specified **design profile** — a design language exported from an external design tool. The skill is not auto-invoked; the user calls it manually and must name the scheme:
 
-```bash
-# Modify an existing design: bring a page under tools/ into spec compliance
-# Redesign: build a new page or redo an existing design from scratch per the spec
+```text
+/skill:parrot-design scheme=polaris
 ```
+
+Each profile lives in `references/profiles/<scheme>/`: `source/` holds the tool's exported design language (DESIGN doc, tokens, CSS variables), `adapters/` holds this skill's component adaptation rules, and `references/components/` holds cross-profile behavior components (i18n, ARIA, reduced-motion). Tokens and components are reused freely, but pages are assembled from requirements plus components — never wholesale copies of templates.
+
+**Current profiles:** `polaris` (Polaris v7)
 
 ---
 
@@ -209,13 +194,18 @@ Slash commands for omp / Claude Code. Copy `commands/*.md` to `~/.omp/agent/comm
 ```
 techne/
 ├── skills/
-│   ├── agentic-engineer/
-│   │   ├── SKILL.md
-│   │   ├── scripts/
-│   │   └── references/
+│   ├── memory/
+│   │   └── SKILL.md
 │   ├── parrot-design/
 │   │   ├── SKILL.md
+│   │   ├── evals/
 │   │   └── references/
+│   │       ├── components/
+│   │       └── profiles/
+│   │           └── polaris/
+│   │               ├── manifest.json
+│   │               ├── source/
+│   │               └── adapters/
 │   ├── vivaldi-browser/
 │   │   ├── SKILL.md
 │   │   └── scripts/
