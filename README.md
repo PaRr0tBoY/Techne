@@ -6,7 +6,7 @@
   <a href="https://skills.sh/PaRr0tBoY/Techne"><img src="https://skills.sh/b/PaRr0tBoY/Techne" alt="skills.sh"></a>
   <img src="https://img.shields.io/github/license/PaRr0tBoY/Techne" alt="License">
   <img src="https://img.shields.io/github/stars/PaRr0tBoY/Techne" alt="GitHub Stars">
-  <img src="https://img.shields.io/badge/skills-7-blue" alt="Skills">
+  <img src="https://img.shields.io/badge/skills-8-blue" alt="Skills">
   <img src="https://img.shields.io/badge/node.js-%3E%3D18-green" alt="Node.js">
 </p>
 
@@ -26,7 +26,7 @@ npx skills@latest add -y -g PaRr0tBoY/Techne
 
 A modular repository of skills and commands for AI coding agents. Each skill is a self-contained directory with a `SKILL.md` definition and supporting scripts. Each command is a prompt template in a `.md` file — drop them into your agent's folder and they work immediately.
 
-Seven skills ship today; the structure is designed for you to add more.
+Eight skills ship today; the structure is designed for you to add more.
 
 ---
 
@@ -46,6 +46,7 @@ Seven skills ship today; the structure is designed for you to add more.
 | **[agentic-engineer](skills/agentic-engineer/)** | Mechanical engineering | Project plans · budgets · DFM reviews · CAPA · SOP · test plans · equipment sizing · 16 branch commands covering the full engineering document lifecycle |
 | **[parrot-design](skills/parrot-design/)** | Design profiles | User-specified design profile (Polaris) · tool-exported tokens in `source/` plus component adapters · cross-profile behavior components (i18n / ARIA / reduced-motion) · anti-templating rules |
 | **[memory-transformer](skills/memory/)** | Exam recall | Convert notes / textbook passages / wrong-answer entries into 5 memorizable formats: logic chains · mnemonics · decision trees · comparison tables · keyword formulas · conditions & exceptions · covers 考研 and general coursework |
+| **[plan-coach](skills/plan-coach/)** | Anti-procrastination task breakdown | One-line goal → 5-9 emoji + 💡 micro-steps (first physical ≤60s) · 行动锦囊 3-6 anti-stuck tips · optional 免手/hands-free step · zero-install familiar tools only |
 
 ---
 
@@ -193,6 +194,29 @@ Each profile lives in `references/profiles/<scheme>/`: `source/` holds the tool'
 
 ---
 
+
+## plan-coach
+
+```bash
+npx skills@latest add -y -g PaRr0tBoY/Techne/skills/plan-coach
+```
+
+Zero-friction task-breakdown micro-coach. Turns one vague goal — "想学javascript", "I want to start working out", "通勤路上想练英语口语" — into a Markdown action plan of 5-9 immediately-doable steps, each an emoji action line plus a 💡 one-liner explaining the instant payoff, with a short **行动锦囊** list of anti-procrastination tips. The first step is always a physical ≤60s action so motion starts before motivation arrives; no app installs, sign-ups, or roadmap tables.
+
+```
+用户输入 → "想学javascript但一直拖着没开始"
+
+# 学习JavaScript –简易行动计划
+### 📁 在桌面新建一个名为 js-learning 的文件夹
+> 💡 30秒完成，身体先动起来——启动拖延最强的那一下是动手不是想。
+### ✏️ 粘贴 <script>console.log('Hello JavaScript')</script>
+### 🌐 浏览器打开按F12看控制台 …
+—**行动锦囊**— 每天只做一条 / 卡住先自查5分钟 / 完成30秒小奖励 …
+```
+
+
+---
+
 ## Commands
 
 Slash commands for omp / Claude Code. Copy `commands/*.md` to `~/.omp/agent/commands/` (omp) or
@@ -245,6 +269,8 @@ techne/
 │   └── sync-upstream/
 │       ├── SKILL.md
 │       └── scripts/
+│   ├── plan-coach/
+│   │   └── SKILL.md
 ├── commands/
 │   ├── ask-support.md
 │   ├── you-gon-learn.md

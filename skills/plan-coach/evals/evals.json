@@ -1,0 +1,51 @@
+{
+  "skill_name": "plan-coach",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "想学javascript但一直拖着没开始",
+      "expected_output": "Markdown action plan: H1, 5-9 emoji+💡 steps (first physical <=60s), 行动锦囊 3-6",
+      "files": [],
+      "assertions": [
+        "有H1标题",
+        "步骤5-9条",
+        "首步<=60s物理动作",
+        "每步有emoji+💡引用块",
+        "无装软件/注册/外部复杂流程",
+        "只用熟悉工具",
+        "有行动锦囊3-6条"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "I want to start working out at home but keep putting it off",
+      "expected_output": "Markdown action plan: H1, 5-9 emoji+💡 steps (first physical <=60s), 行动锦囊 3-6",
+      "files": [],
+      "assertions": [
+        "Has H1 title",
+        "5-9 steps",
+        "First step is physical <=60s",
+        "Each step emoji + >💡 quote",
+        "No signup/install",
+        "Familiar tools only",
+        "行动锦囊 3-6 items"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "通勤路上想开始练英语口语，在地铁里手基本腾不出来",
+      "expected_output": "Markdown action plan: H1, 5-9 emoji+💡 steps (first physical <=60s), 行动锦囊 3-6, 免手模式",
+      "files": [],
+      "assertions": [
+        "有H1标题",
+        "步骤5-9条",
+        "首步<=60s物理动作",
+        "每步emoji+💡",
+        "无装软件/注册",
+        "只用熟悉工具",
+        "含免手模式替代步骤",
+        "行动锦囊3-6条"
+      ]
+    }
+  ]
+}
